@@ -68,3 +68,40 @@ Goal progress = `totalAssets / goal.target_amount × 100` — goals have no dedi
 ### shadcn/ui Config
 
 Style: New York, base color: Neutral, CSS variables enabled. Path alias `@/components/ui` for all UI primitives.
+
+## BMAD Workflow Rules
+
+This project uses the BMAD method. When receiving implementation requests, follow the decision tree below — **do not implement directly** without going through the appropriate BMAD workflow.
+
+### Decision Tree
+
+```
+New request received
+       │
+       ├─ Bug fix or typo? ──────────────────────────► Implement directly (no BMAD needed)
+       │
+       ├─ Small change / simple feature               ► /bmad-bmm-quick-spec → review → /bmad-bmm-quick-dev
+       │   (≤ 3 files, follows existing patterns)
+       │
+       └─ Medium/large feature or multi-file change  ► /bmad-bmm-create-story → /bmad-bmm-dev-story
+           (new behavior, architecture impact)                                        │
+                                                                          /bmad-bmm-code-review
+```
+
+### When to Use Each Workflow
+
+| Scenario | Workflow | Agent |
+|---|---|---|
+| Quick one-off task, small addition, brownfield tweak | `/bmad-bmm-quick-spec` → `/bmad-bmm-quick-dev` | 🚀 Barry (Quick Flow Solo Dev) |
+| Feature tracked in sprint plan | `/bmad-bmm-create-story` → `/bmad-bmm-dev-story` | 🏃 Bob → 💻 Amelia |
+| Post-implementation quality check | `/bmad-bmm-code-review` | 💻 Amelia |
+| Sprint overview or next story guidance | `/bmad-bmm-sprint-status` | 🏃 Bob |
+| Significant pivot or scope change | `/bmad-bmm-correct-course` | 🏃 Bob |
+
+### Rules
+
+- **Never implement directly** when the request touches > 3 files or introduces new behavior.
+- **Always use a fresh context window** for each BMAD workflow invocation.
+- **Quick Spec must be reviewed and approved** by the user before Quick Dev begins.
+- **Story files are the source of truth** for Dev Story — do not deviate from the spec without user approval.
+- For **validation workflows** (Validate PRD, Code Review), prefer running in a separate high-quality LLM session if available.
