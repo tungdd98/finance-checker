@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/components/ui/drawer'
+import { Button } from '@/components/ui/button'
 import { TransactionForm } from './transaction-form'
 import type { Transaction } from '@/types/database'
 
@@ -36,14 +37,25 @@ export function AddTransactionDialog({
   }
 
   if (isMobile) {
+    const submitLabel = transaction ? 'Cập nhật' : 'Lưu giao dịch'
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>{title}</DrawerTitle>
           </DrawerHeader>
-          <div className="px-4 pb-8">
-            <TransactionForm transaction={transaction} onSuccess={handleSuccess} />
+          <div className="scrollbar-hide flex-1 overflow-y-auto px-4 pb-2">
+            <TransactionForm
+              formId="transaction-form"
+              hideSubmit
+              transaction={transaction}
+              onSuccess={handleSuccess}
+            />
+          </div>
+          <div className="shrink-0 border-t bg-background px-4 pb-8 pt-3">
+            <Button type="submit" form="transaction-form" className="w-full h-12">
+              {submitLabel}
+            </Button>
           </div>
         </DrawerContent>
       </Drawer>

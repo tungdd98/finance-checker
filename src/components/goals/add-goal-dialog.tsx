@@ -34,7 +34,7 @@ export function AddGoalDialog({ open, onOpenChange, goal }: AddGoalDialogProps) 
           <DrawerHeader>
             <DrawerTitle>{title}</DrawerTitle>
           </DrawerHeader>
-          <div className="px-4 pb-8">
+          <div className="scrollbar-hide overflow-y-auto px-4 pb-8">
             <GoalForm goal={goal} onSuccess={() => onOpenChange(false)} />
           </div>
         </DrawerContent>

@@ -79,6 +79,8 @@ type FormValues = z.infer<typeof formSchema>
 interface TransactionFormProps {
   transaction?: Transaction
   onSuccess?: () => void
+  formId?: string
+  hideSubmit?: boolean
 }
 
 function formatAmountDisplay(value: string): string {
@@ -101,7 +103,7 @@ function determineAssetType(categoryId: string, categories: Category[]): 'gold' 
   return null
 }
 
-export function TransactionForm({ transaction, onSuccess }: TransactionFormProps) {
+export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: TransactionFormProps) {
   const createMutation = useCreateTransaction()
   const updateMutation = useUpdateTransaction()
   const isEditing = !!transaction
@@ -338,7 +340,7 @@ export function TransactionForm({ transaction, onSuccess }: TransactionFormProps
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form id={formId} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {/* Type - segmented */}
         <FormField
           control={form.control}
@@ -683,11 +685,13 @@ export function TransactionForm({ transaction, onSuccess }: TransactionFormProps
           )}
         />
 
-        <Button type="submit" className="w-full h-12" disabled={isPending}>
-          {isPending
-            ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Đang lưu...</>
-            : submitLabel}
-        </Button>
+        {!hideSubmit && (
+          <Button type="submit" className="w-full h-12" disabled={isPending}>
+            {isPending
+              ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Đang lưu...</>
+              : submitLabel}
+          </Button>
+        )}
       </form>
     </Form>
   )
