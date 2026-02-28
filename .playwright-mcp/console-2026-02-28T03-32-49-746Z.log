@@ -1,0 +1,221 @@
+[    1191ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <Primitive.div tabIndex={-1} data-orientation="horizontal" asChild={true} ref={function} style={{outline:"none"}} ...>
+      <Primitive.div.Slot tabIndex={-1} data-orientation="horizontal" style={{outline:"none"}} ...>
+        <Primitive.div.SlotClone tabIndex={-1} data-orientation="horizontal" style={{outline:"none"}} ...>
+          <Primitive.div role="tablist" aria-orientation="horizontal" data-slot="tabs-list" data-variant="default" ...>
+            <div role="tablist" aria-orientation="horizontal" data-slot="tabs-list" data-variant="default" ...>
+              <TabsTrigger value="all" className="flex-1">
+                <TabsTrigger data-slot="tabs-trigger" className={"focus-vi..."} value="all">
+                  <RovingFocusGroupItem asChild={true} __scopeRovingFocusGroup={{...}} focusable={true} active={true}>
+                    <RovingFocusGroupCollectionItemSlot scope={{...}} id="radix-_R_r..." focusable={true} active={true}>
+                      <RovingFocusGroupCollectionItemSlot.Slot data-radix-collection-item="" ref={function}>
+                        <RovingFocusGroupCollectionItemSlot.SlotClone data-radix-collection-item="" ref={function}>
+                          <Primitive.span tabIndex={-1} data-orientation="horizontal" asChild={true} ref={function} ...>
+                            <Primitive.span.Slot tabIndex={-1} data-orientation="horizontal" ...>
+                              <Primitive.span.SlotClone tabIndex={-1} data-orientation="horizontal" ...>
+                                <Primitive.button type="button" role="tab" aria-selected={true} ...>
+                                  <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={true}
++                                   aria-controls="radix-_R_3inebmknelb_-content-all"
+-                                   aria-controls="radix-_R_eatpeqknelb_-content-all"
+                                    data-state="active"
+                                    data-disabled={undefined}
+                                    disabled={false}
++                                   id="radix-_R_3inebmknelb_-trigger-all"
+-                                   id="radix-_R_eatpeqknelb_-trigger-all"
+                                    data-slot="tabs-trigger"
+                                    className={"focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ou..."}
+                                    onMouseDown={function}
+                                    onKeyDown={function}
+                                    onFocus={function}
+                                    tabIndex={-1}
+                                    data-orientation="horizontal"
+                                    data-radix-collection-item=""
+                                    ref={function}
+                                  >
++                                   Tất cả
+              <TabsTrigger value="income" className="flex-1">
+                <TabsTrigger data-slot="tabs-trigger" className={"focus-vi..."} value="income">
+                  <RovingFocusGroupItem asChild={true} __scopeRovingFocusGroup={{...}} focusable={true} active={false}>
+                    <RovingFocusGroupCollectionItemSlot scope={{...}} id="radix-_R_1..." focusable={true} active={false}>
+                      <RovingFocusGroupCollectionItemSlot.Slot data-radix-collection-item="" ref={function}>
+                        <RovingFocusGroupCollectionItemSlot.SlotClone data-radix-collection-item="" ref={function}>
+                          <Primitive.span tabIndex={-1} data-orientation="horizontal" asChild={true} ref={function} ...>
+                            <Primitive.span.Slot tabIndex={-1} data-orientation="horizontal" ...>
+                              <Primitive.span.SlotClone tabIndex={-1} data-orientation="horizontal" ...>
+                                <Primitive.button type="button" role="tab" aria-selected={false} ...>
+                                  <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={false}
++                                   aria-controls="radix-_R_3inebmknelb_-content-income"
+-                                   aria-controls="radix-_R_eatpeqknelb_-content-income"
+                                    data-state="inactive"
+                                    data-disabled={undefined}
+                                    disabled={false}
++                                   id="radix-_R_3inebmknelb_-trigger-income"
+-                                   id="radix-_R_eatpeqknelb_-trigger-income"
+                                    data-slot="tabs-trigger"
+                                    className={"focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ou..."}
+                                    onMouseDown={function}
+                                    onKeyDown={function}
+                                    onFocus={function}
+                                    tabIndex={-1}
+                                    data-orientation="horizontal"
+                                    data-radix-collection-item=""
+                                    ref={function}
+                                  >
++                                   Thu
+              <TabsTrigger value="expense" className="flex-1">
+                <TabsTrigger data-slot="tabs-trigger" className={"focus-vi..."} value="expense">
+                  <RovingFocusGroupItem asChild={true} __scopeRovingFocusGroup={{...}} focusable={true} active={false}>
+                    <RovingFocusGroupCollectionItemSlot scope={{...}} id="radix-_R_1..." focusable={true} active={false}>
+                      <RovingFocusGroupCollectionItemSlot.Slot data-radix-collection-item="" ref={function}>
+                        <RovingFocusGroupCollectionItemSlot.SlotClone data-radix-collection-item="" ref={function}>
+                          <Primitive.span tabIndex={-1} data-orientation="horizontal" asChild={true} ref={function} ...>
+                            <Primitive.span.Slot tabIndex={-1} data-orientation="horizontal" ...>
+                              <Primitive.span.SlotClone tabIndex={-1} data-orientation="horizontal" ...>
+                                <Primitive.button type="button" role="tab" aria-selected={false} ...>
+                                  <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={false}
++                                   aria-controls="radix-_R_3inebmknelb_-content-expense"
+-                                   aria-controls="radix-_R_eatpeqknelb_-content-expense"
+                                    data-state="inactive"
+                                    data-disabled={undefined}
+                                    disabled={false}
++                                   id="radix-_R_3inebmknelb_-trigger-expense"
+-                                   id="radix-_R_eatpeqknelb_-trigger-expense"
+                                    data-slot="tabs-trigger"
+                                    className={"focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ou..."}
+                                    onMouseDown={function}
+                                    onKeyDown={function}
+                                    onFocus={function}
+                                    tabIndex={-1}
+                                    data-orientation="horizontal"
+                                    data-radix-collection-item=""
+                                    ref={function}
+                                  >
++                                   Chi
+              <TabsTrigger value="investment" className="flex-1">
+                <TabsTrigger data-slot="tabs-trigger" className={"focus-vi..."} value="investment">
+                  <RovingFocusGroupItem asChild={true} __scopeRovingFocusGroup={{...}} focusable={true} active={false}>
+                    <RovingFocusGroupCollectionItemSlot scope={{...}} id="radix-_R_2..." focusable={true} active={false}>
+                      <RovingFocusGroupCollectionItemSlot.Slot data-radix-collection-item="" ref={function}>
+                        <RovingFocusGroupCollectionItemSlot.SlotClone data-radix-collection-item="" ref={function}>
+                          <Primitive.span tabIndex={-1} data-orientation="horizontal" asChild={true} ref={function} ...>
+                            <Primitive.span.Slot tabIndex={-1} data-orientation="horizontal" ...>
+                              <Primitive.span.SlotClone tabIndex={-1} data-orientation="horizontal" ...>
+                                <Primitive.button type="button" role="tab" aria-selected={false} ...>
+                                  <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={false}
++                                   aria-controls="radix-_R_3inebmknelb_-content-investment"
+-                                   aria-controls="radix-_R_eatpeqknelb_-content-investment"
+                                    data-state="inactive"
+                                    data-disabled={undefined}
+                                    disabled={false}
++                                   id="radix-_R_3inebmknelb_-trigger-investment"
+-                                   id="radix-_R_eatpeqknelb_-trigger-investment"
+                                    data-slot="tabs-trigger"
+                                    className={"focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ou..."}
+                                    onMouseDown={function}
+                                    onKeyDown={function}
+                                    onFocus={function}
+                                    tabIndex={-1}
+                                    data-orientation="horizontal"
+                                    data-radix-collection-item=""
+                                    ref={function}
+                                  >
++                                   Đầu tư
+ @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[   99833ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   99835ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  139872ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  139873ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 1568625ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <SelectProvider required={undefined} scope={undefined} trigger={null} ...>
+      <SelectCollectionProvider scope={undefined}>
+        <SelectCollectionProviderProvider scope={undefined} itemMap={Map} collectionRef={{current:null}}>
+          <SelectProvider scope={undefined} onNativeOptionAdd={function Select.useCallback} ...>
+            <SelectTrigger className="w-48">
+              <SelectTrigger data-slot="select-tri..." data-size="default" className={"border-i..."}>
+                <PopperAnchor asChild={true} __scopePopper={{Popper:[...]}}>
+                  <Primitive.div asChild={true} ref={function}>
+                    <Primitive.div.Slot ref={function}>
+                      <Primitive.div.SlotClone ref={function}>
+                        <Primitive.button type="button" role="combobox" aria-controls="radix-_R_1..." ...>
+                          <button
+                            type="button"
+                            role="combobox"
++                           aria-controls="radix-_R_155esnebmknelb_"
+-                           aria-controls="radix-_R_4klritpeqknelb_"
+                            aria-expanded={false}
+                            aria-required={undefined}
+                            aria-autocomplete="none"
+                            dir="ltr"
+                            data-state="closed"
+                            disabled={false}
+                            data-disabled={undefined}
+                            data-placeholder={undefined}
+                            data-slot="select-trigger"
+                            data-size="default"
+                            className={"border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='tex..."}
+                            onClick={function handleEvent}
+                            onPointerDown={function handleEvent}
+                            onKeyDown={function handleEvent}
+                            ref={function}
+                          >
+            ...
+      ...
+ @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:3127
+[ 1626146ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 1626148ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2058133ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2058135ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2104664ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 2104665ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3082882ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3082883ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3094613ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3094615ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3300212ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3300215ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3304203ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3304204ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3487745ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3487747ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3525465ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3525466ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3560171ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 3560172ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6902493ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[ 6902494ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
