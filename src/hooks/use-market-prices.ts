@@ -60,6 +60,7 @@ export function useUpdateMarketPrice() {
       ...updates
     }: {
       id: string
+      ticker_symbol?: string | null
       price_per_unit?: number | null
       bank_name?: string | null
       term_months?: number | null

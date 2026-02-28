@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -118,6 +118,7 @@ export function MarketPriceFormDialog({
   const createMutation = useCreateMarketPrice()
   const updateMutation = useUpdateMarketPrice()
   const isEditing = !!editingPrice
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -174,45 +175,50 @@ export function MarketPriceFormDialog({
   }, [open, editingPrice, form])
 
   const onSubmit = async (values: FormValues) => {
-    if (isEditing) {
-      if (values.asset_type === 'savings') {
-        await updateMutation.mutateAsync({
-          id: editingPrice.id,
-          bank_name: values.bank_name || null,
-          term_months: values.term_months ? parseInt(values.term_months) : null,
-          interest_rate: values.interest_rate ? parseFloat(values.interest_rate) : null,
-          price_per_unit: null,
-        })
+    setSubmitError(null)
+    try {
+      if (isEditing) {
+        if (values.asset_type === 'savings') {
+          await updateMutation.mutateAsync({
+            id: editingPrice.id,
+            bank_name: values.bank_name || null,
+            term_months: values.term_months ? parseInt(values.term_months) : null,
+            interest_rate: values.interest_rate ? parseFloat(values.interest_rate) : null,
+            price_per_unit: null,
+          })
+        } else {
+          await updateMutation.mutateAsync({
+            id: editingPrice.id,
+            ticker_symbol: normalizeTickerSymbol(values.ticker_symbol) || null,
+            price_per_unit: parseAmount(values.price_per_unit || '0'),
+          })
+        }
       } else {
-        await updateMutation.mutateAsync({
-          id: editingPrice.id,
-          price_per_unit: parseAmount(values.price_per_unit || '0'),
-        })
+        if (values.asset_type === 'savings') {
+          await createMutation.mutateAsync({
+            asset_type: 'savings',
+            bank_name: values.bank_name || null,
+            term_months: values.term_months ? parseInt(values.term_months) : null,
+            interest_rate: values.interest_rate ? parseFloat(values.interest_rate) : null,
+            ticker_symbol: null,
+            price_per_unit: null,
+          })
+        } else {
+          await createMutation.mutateAsync({
+            asset_type: values.asset_type,
+            ticker_symbol: normalizeTickerSymbol(values.ticker_symbol),
+            price_per_unit: parseAmount(values.price_per_unit || '0'),
+            bank_name: null,
+            term_months: null,
+            interest_rate: null,
+          })
+        }
       }
-    } else {
-      if (values.asset_type === 'savings') {
-        await createMutation.mutateAsync({
-          asset_type: 'savings',
-          bank_name: values.bank_name || null,
-          term_months: values.term_months ? parseInt(values.term_months) : null,
-          interest_rate: values.interest_rate ? parseFloat(values.interest_rate) : null,
-          ticker_symbol: null,
-          price_per_unit: null,
-        })
-      } else {
-        await createMutation.mutateAsync({
-          asset_type: values.asset_type,
-          ticker_symbol: normalizeTickerSymbol(values.ticker_symbol),
-          price_per_unit: parseAmount(values.price_per_unit || '0'),
-          bank_name: null,
-          term_months: null,
-          interest_rate: null,
-        })
-      }
+      form.reset()
+      onOpenChange(false)
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Có lỗi xảy ra, vui lòng thử lại')
     }
-
-    form.reset()
-    onOpenChange(false)
   }
 
   const isPending = createMutation.isPending || updateMutation.isPending
@@ -329,7 +335,7 @@ export function MarketPriceFormDialog({
               </>
             ) : (
               <>
-                {/* Ticker Symbol - disabled when editing */}
+                {/* Ticker Symbol */}
                 <FormField
                   control={form.control}
                   name="ticker_symbol"
@@ -341,7 +347,6 @@ export function MarketPriceFormDialog({
                           {...field}
                           placeholder="VD: SJC, VNM, FUEVFVND..."
                           className="h-11"
-                          disabled={isEditing}
                           onBlur={(e) => {
                             const normalized = e.target.value.trim().toUpperCase()
                             field.onChange(normalized)
@@ -380,6 +385,10 @@ export function MarketPriceFormDialog({
                   )}
                 />
               </>
+            )}
+
+            {submitError && (
+              <p className="text-sm text-destructive">{submitError}</p>
             )}
 
             <div className="flex gap-2 pt-2">
