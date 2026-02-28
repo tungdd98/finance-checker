@@ -40,6 +40,7 @@ If you have production data, create a duplicate Supabase project first and test 
 4. Click **Run** to execute
 
 **What this does:**
+
 - Extends `transactions` table with investment columns
 - Creates `market_prices` table
 - Creates `asset_holdings` view (auto-aggregates holdings from transactions)
@@ -95,6 +96,7 @@ This will catch any TypeScript errors.
 ### Database Schema
 
 **Transactions Table (Extended):**
+
 ```sql
 -- New columns for investment tracking
 transaction_direction  -- 'buy' or 'sell' (nullable)
@@ -107,6 +109,7 @@ term_months         -- For savings accounts (nullable)
 ```
 
 **New Tables:**
+
 - `market_prices` - Current market prices for assets
 - `asset_holdings` (VIEW) - Derived from transactions
 - `cash_balance` (VIEW) - Derived from transactions
@@ -114,6 +117,7 @@ term_months         -- For savings accounts (nullable)
 ### TypeScript Types
 
 **Updated:** `src/types/database.ts`
+
 - Added `TransactionDirection` type
 - Extended `Transaction` interface with investment fields
 - Added `MarketPrice`, `AssetHolding`, `CashBalance` interfaces
@@ -122,21 +126,25 @@ term_months         -- For savings accounts (nullable)
 ### New Hooks
 
 **Created:**
+
 - `src/hooks/use-asset-holdings.ts` - Fetch and enrich holdings
 - `src/hooks/use-cash-balance.ts` - Fetch cash balance
 - `src/hooks/use-market-prices.ts` - Manage market prices
 
 **Updated:**
+
 - `src/hooks/use-transactions.ts` - Supports investment fields
 - `src/hooks/use-dashboard-stats.ts` - Uses new views for total assets
 
 ### UI Components
 
 **Updated:**
+
 - `src/components/transactions/transaction-form.tsx` - Dynamic form with conditional investment fields
 - `src/app/(dashboard)/assets/page.tsx` - Uses new hooks and holdings view
 
 **Created:**
+
 - `src/components/assets/asset-holdings-list.tsx` - Display aggregated holdings
 
 ## Testing Guide
@@ -175,6 +183,7 @@ term_months         -- For savings accounts (nullable)
 6. Save
 
 **Expected:**
+
 - Cash balance decreases by 82M
 - Assets page shows 1 gold holding
 - Total assets = cash + gold value
@@ -187,6 +196,7 @@ term_months         -- For savings accounts (nullable)
 4. Save
 
 **Expected:**
+
 - Holdings show total quantity: `1.5` chỉ
 - Weighted average cost: `81,666,667` ₫/chỉ
 - Total cost basis: `122,500,000` ₫
@@ -202,6 +212,7 @@ term_months         -- For savings accounts (nullable)
 7. Save
 
 **Expected:**
+
 - Holdings show quantity: `1.0` chỉ remaining
 - Cash balance increases by 41.5M
 - P&L shows profit
@@ -219,6 +230,7 @@ term_months         -- For savings accounts (nullable)
 6. Save
 
 **Expected:**
+
 - Holdings show VNM stock: 100 shares
 - Cash balance decreases by 8.2M
 
@@ -236,6 +248,7 @@ term_months         -- For savings accounts (nullable)
 6. Save
 
 **Expected:**
+
 - Holdings show savings account
 - Display bank name, interest rate, term
 - Cash balance decreases by 50M
@@ -252,6 +265,7 @@ term_months         -- For savings accounts (nullable)
 3. Refresh Assets page
 
 **Expected:**
+
 - Gold holding current value updates
 - P&L recalculates
 - Total assets updates
@@ -263,6 +277,7 @@ term_months         -- For savings accounts (nullable)
 3. Check Assets page
 
 **Expected:**
+
 - Holdings recalculate correctly
 - Cash balance adjusts
 
@@ -272,6 +287,7 @@ term_months         -- For savings accounts (nullable)
 2. Check "Tổng tài sản" card
 
 **Expected:**
+
 - Shows cash balance + sum of all investment holdings at current market prices
 - Goal progress uses this calculation
 
@@ -386,12 +402,15 @@ If you encounter issues:
 ## Summary of Files Changed
 
 **Database:**
+
 - `supabase/migration-investment-tracking.sql` (NEW)
 
 **Types:**
+
 - `src/types/database.ts` (UPDATED)
 
 **Hooks:**
+
 - `src/hooks/use-asset-holdings.ts` (NEW)
 - `src/hooks/use-cash-balance.ts` (NEW)
 - `src/hooks/use-market-prices.ts` (NEW)
@@ -399,9 +418,11 @@ If you encounter issues:
 - `src/hooks/use-dashboard-stats.ts` (UPDATED)
 
 **Components:**
+
 - `src/components/transactions/transaction-form.tsx` (UPDATED)
 - `src/components/assets/asset-holdings-list.tsx` (NEW)
 - `src/app/(dashboard)/assets/page.tsx` (UPDATED)
 
 **Documentation:**
+
 - `MIGRATION-GUIDE.md` (NEW - this file)

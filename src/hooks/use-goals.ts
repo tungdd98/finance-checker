@@ -30,11 +30,7 @@ export function useCreateGoal() {
       show_on_dashboard?: boolean
     }) => {
       const supabase = createClient()
-      const { data: result, error } = await supabase
-        .from('goals')
-        .insert(data)
-        .select()
-        .single()
+      const { data: result, error } = await supabase.from('goals').insert(data).select().single()
 
       if (error) throw error
       return result

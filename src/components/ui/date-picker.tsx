@@ -7,14 +7,10 @@ import { CalendarIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
 interface DatePickerProps {
-  value: string                    // yyyy-MM-dd string (form field format)
+  value: string // yyyy-MM-dd string (form field format)
   onChange: (value: string) => void
   placeholder?: string
   disabled?: boolean
@@ -53,9 +49,7 @@ export function DatePicker({
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4 opacity-50" />
-          {valid
-            ? format(selectedDate!, 'dd/MM/yyyy')
-            : placeholder}
+          {valid ? format(selectedDate!, 'dd/MM/yyyy') : placeholder}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">

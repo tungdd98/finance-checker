@@ -12,11 +12,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import type { MarketPrice } from '@/types/database'
 
 interface TickerSymbolComboboxProps {
@@ -82,16 +78,9 @@ export function TickerSymbolCombobox({
             ) : (
               <CommandGroup>
                 {options.map((ticker) => (
-                  <CommandItem
-                    key={ticker}
-                    value={ticker}
-                    onSelect={() => handleSelect(ticker)}
-                  >
+                  <CommandItem key={ticker} value={ticker} onSelect={() => handleSelect(ticker)}>
                     <Check
-                      className={cn(
-                        'mr-2 h-4 w-4',
-                        value === ticker ? 'opacity-100' : 'opacity-0'
-                      )}
+                      className={cn('mr-2 h-4 w-4', value === ticker ? 'opacity-100' : 'opacity-0')}
                     />
                     {ticker}
                   </CommandItem>

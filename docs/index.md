@@ -8,39 +8,39 @@
 
 ## Thông tin nhanh
 
-| Thuộc tính | Giá trị |
-|-----------|---------|
-| **Tên** | Family Finance Command Center |
-| **Mục đích** | Quản lý tài chính gia đình 2 người (vợ/chồng), VND, vi-VN |
-| **Framework** | Next.js 16.1.6 (App Router) |
-| **Ngôn ngữ** | TypeScript 5 |
-| **Backend** | Supabase (PostgreSQL + Auth) |
-| **Deploy** | Vercel |
-| **Architecture** | Monolith — Client-side data access qua TanStack Query |
+| Thuộc tính       | Giá trị                                                   |
+| ---------------- | --------------------------------------------------------- |
+| **Tên**          | Family Finance Command Center                             |
+| **Mục đích**     | Quản lý tài chính gia đình 2 người (vợ/chồng), VND, vi-VN |
+| **Framework**    | Next.js 16.1.6 (App Router)                               |
+| **Ngôn ngữ**     | TypeScript 5                                              |
+| **Backend**      | Supabase (PostgreSQL + Auth)                              |
+| **Deploy**       | Vercel                                                    |
+| **Architecture** | Monolith — Client-side data access qua TanStack Query     |
 
 ---
 
 ## Tài liệu được tạo
 
-| Tài liệu | Mô tả |
-|---------|-------|
-| [Tổng quan dự án](./project-overview.md) | Mô tả, tech stack, routes, kiến trúc tổng quát |
-| [Kiến trúc kỹ thuật](./architecture.md) | Request flow, layers, patterns, auth, state management |
-| [Mô hình dữ liệu](./data-models.md) | Schema DB, views, TypeScript types, migrations |
-| [API Contracts](./api-contracts.md) | Tất cả Supabase hooks, queries, mutations |
-| [Danh mục Component](./component-inventory.md) | Tất cả components, patterns, usage |
-| [Cây thư mục](./source-tree-analysis.md) | Cấu trúc thư mục có annotations |
-| [Hướng dẫn phát triển](./development-guide.md) | Setup, commands, conventions, patterns |
+| Tài liệu                                       | Mô tả                                                  |
+| ---------------------------------------------- | ------------------------------------------------------ |
+| [Tổng quan dự án](./project-overview.md)       | Mô tả, tech stack, routes, kiến trúc tổng quát         |
+| [Kiến trúc kỹ thuật](./architecture.md)        | Request flow, layers, patterns, auth, state management |
+| [Mô hình dữ liệu](./data-models.md)            | Schema DB, views, TypeScript types, migrations         |
+| [API Contracts](./api-contracts.md)            | Tất cả Supabase hooks, queries, mutations              |
+| [Danh mục Component](./component-inventory.md) | Tất cả components, patterns, usage                     |
+| [Cây thư mục](./source-tree-analysis.md)       | Cấu trúc thư mục có annotations                        |
+| [Hướng dẫn phát triển](./development-guide.md) | Setup, commands, conventions, patterns                 |
 
 ---
 
 ## Tài liệu có sẵn trong project
 
-| Tài liệu | Mô tả |
-|---------|-------|
-| [CLAUDE.md](../CLAUDE.md) | Hướng dẫn cho Claude Code (conventions, architecture notes) |
-| [README.md](../README.md) | Project README |
-| [MIGRATION-GUIDE.md](../MIGRATION-GUIDE.md) | Hướng dẫn migration |
+| Tài liệu                                    | Mô tả                                                       |
+| ------------------------------------------- | ----------------------------------------------------------- |
+| [CLAUDE.md](../CLAUDE.md)                   | Hướng dẫn cho Claude Code (conventions, architecture notes) |
+| [README.md](../README.md)                   | Project README                                              |
+| [MIGRATION-GUIDE.md](../MIGRATION-GUIDE.md) | Hướng dẫn migration                                         |
 
 ---
 
@@ -78,13 +78,13 @@ Chi tiết: [Hướng dẫn phát triển](./development-guide.md)
 
 ## Routes nhanh
 
-| Route | Component chính | Hook chính |
-|-------|----------------|-----------|
-| `/` | `DashboardPage` | `useMonthlyCashflow`, `usePinnedGoal`, `useTotalAssets` |
-| `/transactions` | `TransactionsPage` | `useTransactions` |
-| `/assets` | `AssetsPage` | `useAssetHoldings` |
-| `/goals` | `GoalsPage` | `useGoals`, `useTotalAssets` |
-| `/settings/market-prices` | `MarketPricesPage` | `useMarketPrices` |
+| Route                     | Component chính    | Hook chính                                              |
+| ------------------------- | ------------------ | ------------------------------------------------------- |
+| `/`                       | `DashboardPage`    | `useMonthlyCashflow`, `usePinnedGoal`, `useTotalAssets` |
+| `/transactions`           | `TransactionsPage` | `useTransactions`                                       |
+| `/assets`                 | `AssetsPage`       | `useAssetHoldings`                                      |
+| `/goals`                  | `GoalsPage`        | `useGoals`, `useTotalAssets`                            |
+| `/settings/market-prices` | `MarketPricesPage` | `useMarketPrices`                                       |
 
 ---
 
@@ -104,4 +104,4 @@ Chi tiết: [Hướng dẫn phát triển](./development-guide.md)
 
 ---
 
-*Tạo bởi BMAD Document Project workflow — 2026-02-28*
+_Tạo bởi BMAD Document Project workflow — 2026-02-28_

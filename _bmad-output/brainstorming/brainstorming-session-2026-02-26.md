@@ -4,7 +4,8 @@ inputDocuments: []
 session_topic: 'Website quản lý tài chính gia đình với theo dõi đầu tư đa dạng (tiết kiệm ngân hàng, vàng, cổ phiếu ETF), quản lý thu nhập và mục tiêu tài chính'
 session_goals: 'Brainstorm toàn diện về tính năng sáng tạo, UX/UI, kiến trúc kỹ thuật tối ưu, và khả năng mở rộng cho website quản lý tài chính gia đình'
 selected_approach: 'AI-Recommended Techniques'
-techniques_used: ['First Principles Thinking', 'SCAMPER Method', 'Six Thinking Hats', 'What If Scenarios']
+techniques_used:
+  ['First Principles Thinking', 'SCAMPER Method', 'Six Thinking Hats', 'What If Scenarios']
 ideas_generated: 36
 context_file: ''
 session_status: 'complete'
@@ -21,12 +22,14 @@ session_duration: '~90 minutes'
 **Topic:** Website quản lý tài chính gia đình với theo dõi đầu tư đa dạng (tiết kiệm ngân hàng, vàng, cổ phiếu ETF), quản lý thu nhập và mục tiêu tài chính
 
 **Goals:** Brainstorm toàn diện về:
+
 - ✨ Tính năng sáng tạo và khác biệt
 - 🎨 Trải nghiệm người dùng (UX/UI)
 - 🏗️ Kiến trúc kỹ thuật tối ưu
 - 💼 Khả năng mở rộng trong tương lai
 
 **Technical Context:**
+
 - **Frontend:** React/Next.js (TypeScript), Tailwind/shadcn UI, ui-ux-pro-max-skill
 - **Backend:** Supabase
 - **Deploy:** Vercel
@@ -46,22 +49,30 @@ Phiên brainstorming được thiết lập để khám phá toàn diện các k
 **Recommended 4-Phase Technique Sequence:**
 
 ### Phase 1: Foundation Setting (15-20 phút)
+
 **First Principles Thinking** (Creative category)
+
 - **Lý do:** Loại bỏ giả định về "finance tracker truyền thống" và xây dựng lại từ nhu cầu cơ bản của gia đình. Đây là private use case, không cần tuân theo mô hình sẵn có.
 - **Kết quả:** Xác định nền tảng chắc chắn - gia đình thực sự cần gì, thu nhập/chi tiêu như thế nào, quyết định đầu tư ra sao.
 
 ### Phase 2: Creative Feature Generation (20-25 phút)
+
 **SCAMPER Method** (Structured category)
+
 - **Lý do xây dựng từ Phase 1:** Sau khi có foundation rõ ràng, SCAMPER khám phá có hệ thống các features qua 7 lenses (Substitute, Combine, Adapt, Modify, Put to other uses, Eliminate, Reverse).
 - **Kết quả:** 30-50+ tính năng sáng tạo từ tracking methods, data visualization, đến goal management đột phá.
 
 ### Phase 3: Comprehensive Perspective Analysis (15-20 phút)
+
 **Six Thinking Hats** (Structured category)
+
 - **Lý do bổ sung:** Đánh giá toàn diện ideas qua 6 perspectives - UX/UI (emotions, benefits), technical architecture (data, risks), creativity, và roadmap.
 - **Kết quả:** Data model cho Supabase, UX intuitive, technical considerations, implementation plan.
 
 ### Phase 4: Future-Proofing & Edge Cases (10-15 phút)
+
 **What If Scenarios** (Creative category)
+
 - **Lý do kết thúc:** Đảm bảo architecture có thể scale bằng extreme scenarios testing.
 - **Kết quả:** Kiến trúc linh hoạt xử lý gia đình mở rộng, nhiều tài sản, collaborative features, multiple currencies.
 
@@ -76,6 +87,7 @@ Phiên brainstorming được thiết lập để khám phá toàn diện các k
 **Key Discoveries:**
 
 ### Core Truths Identified:
+
 1. **Real-time Financial Visibility** - Cần biết dòng tiền đang ở đâu NGAY BÂY GIỜ
 2. **Asset Allocation Intelligence** - Không chỉ tracking mà là decision-making tool
 3. **Goal Progress Transparency** - Motivational aspect với concrete milestones
@@ -185,8 +197,8 @@ _Concept_: Single shared account (1 email/password), both login same credentials
 _Novelty_: Eliminates complexity layer. Perfect cho trust-based family use.
 
 **[Data Model #26]: Database-Driven Categories**
-_Concept_: Categories table: id, name, type, icon, color, is_default. App seeds defaults on first run, user adds customs.
-_Novelty_: Flexible, queryable, maintainable. Easy filter với SQL joins.
+_Concept_: Categories table: id, name, type, icon, color, is*default. App seeds defaults on first run, user adds customs.
+\_Novelty*: Flexible, queryable, maintainable. Easy filter với SQL joins.
 
 **[Asset Pricing #27]: Snapshot-Only Price Model**
 _Concept_: Assets table chỉ `current_price` + `last_updated_at`. No history table. P&L based on latest snapshot. Lean database, fast queries.
@@ -225,6 +237,7 @@ _Concept_: Only critical validations - amount > 0, date not empty, category sele
 _Novelty_: Balance data integrity và UX simplicity. Trust user judgment.
 
 ### Key Architectural Decisions Made:
+
 - ✅ **Security:** Shared account, no complex permissions, unlisted domain
 - ✅ **Data Model:** Dual taxonomy, snapshot pricing, soft deletes, database-driven categories
 - ✅ **UX Priority:** Mobile-first, dark/light mode, lightning-fast entry (<10s)
@@ -233,6 +246,7 @@ _Novelty_: Balance data integrity và UX simplicity. Trust user judgment.
 - ✅ **Tech Stack:** Next.js + Supabase + Vercel, single shared auth
 
 ### Creative Breakthrough:
+
 **App không phải "finance tracker" - đây là "Financial Command Center"** - tool để đưa ra decisions, không chỉ ghi chép. Insight này drives toàn bộ feature prioritization.
 
 ---
@@ -251,6 +265,7 @@ _Concept_: Combine progress bars với percentages. Goal cards show filled bars 
 _Novelty_: Visual intuition + precise numbers - không force chọn. Quick glance = bar, precision = number.
 
 ### SCAMPER Insights:
+
 - **Substitute:** Rejected voice input, photo scanning, complex substitutions. Prefer manual entry với visual enhancements (progress bars).
 - **Combine:** Rejected complex combinations (timeline viz, goal-specific allocation, tagging, smart insights, storytelling). Keep features separate và simple.
 - **Adapt:** Rejected gamification (badges, streaks), social features (feeds), comparisons, portfolio playlists. Not appropriate cho straightforward family finance tool.
@@ -260,6 +275,7 @@ _Novelty_: Visual intuition + precise numbers - không force chọn. Quick glanc
 - **Reverse:** Time-to-goal countdown, predictive entry = interesting concepts but não priority for MVP.
 
 ### Strategic Confirmation:
+
 SCAMPER validated First Principles architecture. **Less is more** - focus on core functionality executed perfectly rather than feature bloat.
 
 **Total Ideas Count: 36 concepts**
@@ -273,6 +289,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 ### Perspectives Analyzed:
 
 **⚪ White Hat - Facts & Technical Requirements:**
+
 - Tech stack: Next.js + TypeScript + Supabase + Vercel confirmed
 - Data volume: User-controlled, không constraints
 - Data retention: Permanent storage (no archival needed)
@@ -281,9 +298,11 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - Implication: Simple append-only database với soft deletes
 
 **🔴 Red Hat - Emotions & UX:**
+
 - (Skipped per user preference for pragmatic focus)
 
 **💛 Yellow Hat - Benefits & Optimism:**
+
 - **Simplicity wins:** Minimalist auth, no backend maintenance, zero onboarding friction
 - **Mobile-first advantages:** Always accessible, quick checks, touch-optimized
 - **Manual entry benefits:** Full control, no API dependencies, complete privacy
@@ -291,6 +310,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - **Goal system:** Visual motivation, transparency, celebration moments, predictive planning
 
 **⚫ Black Hat - Risks & Mitigation:**
+
 - Manual price update staleness: Accepted as reasonable trade-off
 - Data loss: Supabase backups sufficient
 - Shared account security: Strong password sufficient
@@ -299,17 +319,20 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - Complexity creep: Strict feature discipline required
 
 **💚 Green Hat - Creative Alternatives:**
+
 - State management options: React Context vs Zustand vs React Query (to decide)
 - Chart library options: Recharts vs Tremor (to decide)
 - Future possibilities: Quick-add templates, enhanced visualizations, export capabilities, PWA
 
 **🔵 Blue Hat - Process & Planning:**
+
 - Phase 1 (Weeks 1-3): MVP Core - Auth, DB, Transactions, Dashboard
 - Phase 2 (Weeks 4-5): Asset Management - Tracking, prices, P&L
 - Phase 3 (Weeks 6-7): Goals & Reports - Goal system, reports page
 - Phase 4 (Week 8): Polish - Soft deletes, refinements, testing
 
 ### Strategic Insights:
+
 - **Architecture validated:** Technical decisions sound and appropriate for scale
 - **Risk tolerance clear:** Accept simplicity trade-offs, minimal mitigation needed
 - **Implementation path:** 8-week roadmap với clear phases
@@ -336,12 +359,14 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 ### Key Outcomes:
 
 **1. Core Product Vision Clarified:**
+
 - ✅ **"Financial Command Center"** không phải simple tracker
 - ✅ Decision-making tool for 2-person family
 - ✅ Mobile-first, simple, functional approach
 - ✅ Privacy-focused, no external dependencies
 
 **2. Technical Architecture Defined:**
+
 - ✅ **Stack:** Next.js + TypeScript + Supabase + Vercel
 - ✅ **Auth:** Single shared account, minimal complexity
 - ✅ **Data:** Permanent storage, soft deletes với 30-day purge
@@ -350,6 +375,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 **3. Core Features Identified:**
 
 **Must-Have MVP Features:**
+
 - 📊 **Dashboard:** Hybrid layout (Goal progress + Total assets + Monthly cashflow)
 - 💰 **Transactions:** Lightning-fast entry (<10s), dual taxonomy (Type + Category)
 - 📈 **Asset Management:** Manual price updates, automatic P&L calculation, purchase history
@@ -358,6 +384,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - 🎨 **UX:** Progress bars + percentages, color-coded gains/losses, soft deletes với confirmation
 
 **4. Strategic Principles Established:**
+
 - ✅ Simplicity over features
 - ✅ Manual control over automation
 - ✅ Privacy over convenience
@@ -365,6 +392,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - ✅ Pragmatic over perfect
 
 **5. Implementation Roadmap:**
+
 - Phase 1 (3 weeks): MVP Core
 - Phase 2 (2 weeks): Asset Management
 - Phase 3 (2 weeks): Goals & Reports
@@ -374,6 +402,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 ### Design Decisions Made (35+ decisions):
 
 **Architecture:**
+
 - Minimalist auth model
 - Database-driven categories
 - Snapshot-only pricing
@@ -382,6 +411,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - Soft delete với audit trail
 
 **UX/UI:**
+
 - Hybrid progress visualization
 - Transaction-first quick actions
 - Mobile-first adaptive layout
@@ -390,6 +420,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - Inline edit với history
 
 **Data Model:**
+
 - Smart timestamping (created/updated/transaction dates)
 - Automatic average cost calculation
 - Goal-specific tracking với pinning
@@ -397,6 +428,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 - Asset rebalancing tracker
 
 **Features Explicitly Rejected:**
+
 - ❌ Voice input, photo scanning
 - ❌ API integrations (bank/market data)
 - ❌ Gamification (badges, streaks)
@@ -415,12 +447,14 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 ### Next Steps:
 
 **Immediate Actions:**
+
 1. ✅ Brainstorming complete - 36 concepts documented
 2. 📋 Ready for implementation planning
 3. 🎨 Design mockups (optional)
 4. 💻 Development start: Phase 1 MVP Core
 
 **Long-term Considerations:**
+
 - Monitor for feature creep
 - Maintain simplicity discipline
 - User feedback post-launch
@@ -431,6 +465,7 @@ SCAMPER validated First Principles architecture. **Less is more** - focus on cor
 ## 💭 Facilitator Reflection
 
 **Session Strengths:**
+
 - User có clear vision và strong opinions → fast decision-making
 - Consistent preference for simplicity → coherent architecture
 - Pragmatic mindset → focused on essentials
@@ -451,6 +486,7 @@ Rapid exploration với decisive filtering. User efficiently separated "interest
 36: Hybrid progress visualization
 
 **All ideas captured with:**
+
 - Concept description
 - Novelty factor
 - Strategic rationale

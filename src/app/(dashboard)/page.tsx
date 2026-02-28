@@ -23,10 +23,7 @@ export default function DashboardPage() {
           <h1 className="text-2xl font-bold">Tổng quan</h1>
           <p className="text-muted-foreground text-sm">Tài chính gia đình</p>
         </div>
-        <Button
-          onClick={() => setDialogOpen(true)}
-          className="hidden md:flex gap-2"
-        >
+        <Button onClick={() => setDialogOpen(true)} className="hidden gap-2 md:flex">
           <Plus className="h-4 w-4" />
           Thêm giao dịch
         </Button>
@@ -41,16 +38,13 @@ export default function DashboardPage() {
 
       {/* Recent Transactions */}
       <div>
-        <div className="flex items-center justify-between mb-3">
+        <div className="mb-3 flex items-center justify-between">
           <h2 className="font-semibold">Giao dịch gần đây</h2>
-          <Link
-            href="/transactions"
-            className="text-sm text-primary hover:underline"
-          >
+          <Link href="/transactions" className="text-primary text-sm hover:underline">
             Xem tất cả
           </Link>
         </div>
-        <div className="bg-card rounded-xl border border-border overflow-hidden">
+        <div className="bg-card border-border overflow-hidden rounded-xl border">
           <TransactionList transactions={recentTransactions} isLoading={isLoading} />
         </div>
       </div>

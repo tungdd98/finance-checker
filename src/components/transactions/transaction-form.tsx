@@ -93,7 +93,10 @@ function parseAmount(value: string): number {
   return parseFloat(value.replace(/\./g, '').replace(',', '.'))
 }
 
-function determineAssetType(categoryId: string, categories: Category[]): 'gold' | 'stock' | 'etf' | null {
+function determineAssetType(
+  categoryId: string,
+  categories: Category[]
+): 'gold' | 'stock' | 'etf' | null {
   const category = categories.find((c) => c.id === categoryId)
   if (!category) return null
   const name = category.name.toLowerCase()
@@ -103,7 +106,12 @@ function determineAssetType(categoryId: string, categories: Category[]): 'gold' 
   return null
 }
 
-export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: TransactionFormProps) {
+export function TransactionForm({
+  transaction,
+  onSuccess,
+  formId,
+  hideSubmit,
+}: TransactionFormProps) {
   const createMutation = useCreateTransaction()
   const updateMutation = useUpdateTransaction()
   const isEditing = !!transaction
@@ -111,9 +119,7 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      amount: transaction
-        ? parseInt(String(transaction.amount)).toLocaleString('vi-VN')
-        : '',
+      amount: transaction ? parseInt(String(transaction.amount)).toLocaleString('vi-VN') : '',
       type: transaction?.type ?? 'expense',
       category_id: transaction?.category_id ?? '',
       transaction_date: transaction?.transaction_date ?? format(new Date(), 'yyyy-MM-dd'),
@@ -138,8 +144,7 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const selectedPresetId = (form as any).watch('savings_preset_id') as string | undefined
 
-  const { data: categories = [], isLoading: categoriesLoading } =
-    useCategoriesByType(selectedType)
+  const { data: categories = [], isLoading: categoriesLoading } = useCategoriesByType(selectedType)
   const { data: marketPrices = [] } = useMarketPrices()
 
   const savingsPresets = marketPrices.filter((p) => p.asset_type === 'savings')
@@ -172,7 +177,7 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
     form.setValue('bank_name', preset.bank_name ?? '')
     form.setValue('interest_rate', preset.interest_rate?.toString() ?? '')
     form.setValue('term_months', preset.term_months?.toString() ?? '')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPresetId])
 
   // Investment field configuration based on selected category
@@ -289,7 +294,8 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
       }
 
       const payload = {
-        amount: quantity && unit_price ? quantity * unit_price : parseAmount(investmentValues.amount),
+        amount:
+          quantity && unit_price ? quantity * unit_price : parseAmount(investmentValues.amount),
         type: 'investment' as const,
         category_id: investmentValues.category_id,
         transaction_date: investmentValues.transaction_date,
@@ -354,7 +360,7 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
                     key={t.value}
                     type="button"
                     onClick={() => field.onChange(t.value)}
-                    className={`py-2 px-3 rounded-lg border text-sm font-medium transition-colors ${
+                    className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                       field.value === t.value
                         ? 'bg-primary text-primary-foreground border-primary'
                         : 'bg-background border-border text-muted-foreground hover:bg-muted'
@@ -414,9 +420,9 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
                   <button
                     type="button"
                     onClick={() => field.onChange('buy')}
-                    className={`py-2 px-3 rounded-lg border text-sm font-medium transition-colors ${
+                    className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                       field.value === 'buy'
-                        ? 'bg-green-600 text-white border-green-600'
+                        ? 'border-green-600 bg-green-600 text-white'
                         : 'bg-background border-border text-muted-foreground hover:bg-muted'
                     }`}
                   >
@@ -425,9 +431,9 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
                   <button
                     type="button"
                     onClick={() => field.onChange('sell')}
-                    className={`py-2 px-3 rounded-lg border text-sm font-medium transition-colors ${
+                    className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                       field.value === 'sell'
-                        ? 'bg-red-600 text-white border-red-600'
+                        ? 'border-red-600 bg-red-600 text-white'
                         : 'bg-background border-border text-muted-foreground hover:bg-muted'
                     }`}
                   >
@@ -523,10 +529,7 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Preset tiết kiệm</FormLabel>
-                    <Select
-                      value={(field.value as string) || ''}
-                      onValueChange={field.onChange}
-                    >
+                    <Select value={(field.value as string) || ''} onValueChange={field.onChange}>
                       <FormControl>
                         <SelectTrigger className="h-12">
                           <SelectValue placeholder="Chọn ngân hàng / kỳ hạn..." />
@@ -622,18 +625,18 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
             <FormItem>
               <FormLabel>
                 Số tiền (₫)
-                {selectedType === 'investment' && investmentConfig && !investmentConfig.hideQuantity && (
-                  <span className="text-xs text-muted-foreground ml-2">
-                    (Tự động tính)
-                  </span>
-                )}
+                {selectedType === 'investment' &&
+                  investmentConfig &&
+                  !investmentConfig.hideQuantity && (
+                    <span className="text-muted-foreground ml-2 text-xs">(Tự động tính)</span>
+                  )}
               </FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   autoFocus={selectedType !== 'investment'}
                   placeholder="0"
-                  className="h-14 text-2xl font-bold text-right"
+                  className="h-14 text-right text-2xl font-bold"
                   inputMode="numeric"
                   readOnly={
                     selectedType === 'investment' &&
@@ -641,10 +644,7 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
                     !investmentConfig.hideQuantity
                   }
                   onChange={(e) => {
-                    if (
-                      selectedType !== 'investment' ||
-                      investmentConfig?.hideQuantity
-                    ) {
+                    if (selectedType !== 'investment' || investmentConfig?.hideQuantity) {
                       field.onChange(formatAmountDisplay(e.target.value))
                     }
                   }}
@@ -686,10 +686,15 @@ export function TransactionForm({ transaction, onSuccess, formId, hideSubmit }: 
         />
 
         {!hideSubmit && (
-          <Button type="submit" className="w-full h-12" disabled={isPending}>
-            {isPending
-              ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Đang lưu...</>
-              : submitLabel}
+          <Button type="submit" className="h-12 w-full" disabled={isPending}>
+            {isPending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Đang lưu...
+              </>
+            ) : (
+              submitLabel
+            )}
           </Button>
         )}
       </form>

@@ -35,7 +35,7 @@ export default function GoalsPage() {
 
       {/* Active goals */}
       {(goalsLoading || activeGoals.length > 0) && (
-        <div className="bg-card rounded-xl border border-border overflow-hidden">
+        <div className="bg-card border-border overflow-hidden rounded-xl border">
           <GoalList
             goals={activeGoals}
             totalAssets={totalAssets}
@@ -46,7 +46,7 @@ export default function GoalsPage() {
 
       {/* No goals at all */}
       {!goalsLoading && goals.length === 0 && (
-        <div className="bg-card rounded-xl border border-border overflow-hidden">
+        <div className="bg-card border-border overflow-hidden rounded-xl border">
           <GoalList goals={[]} totalAssets={totalAssets} />
         </div>
       )}
@@ -54,10 +54,10 @@ export default function GoalsPage() {
       {/* Achieved goals */}
       {!goalsLoading && achievedGoals.length > 0 && (
         <div>
-          <h2 className="font-semibold text-sm text-muted-foreground uppercase tracking-wide mb-2 px-1">
+          <h2 className="text-muted-foreground mb-2 px-1 text-sm font-semibold tracking-wide uppercase">
             🏆 Đã hoàn thành ({achievedGoals.length})
           </h2>
-          <div className="bg-card rounded-xl border border-border overflow-hidden opacity-70">
+          <div className="bg-card border-border overflow-hidden rounded-xl border opacity-70">
             <GoalList goals={achievedGoals} totalAssets={totalAssets} />
           </div>
         </div>

@@ -4,10 +4,21 @@ slug: 'enable-ticker-symbol-edit-update-price-dialog'
 created: '2026-02-28'
 status: 'completed'
 stepsCompleted: [1, 2, 3, 4]
-tech_stack: ['Next.js 16', 'React 19', 'TypeScript', 'react-hook-form', 'zod', 'TanStack Query', 'Supabase']
-files_to_modify: ['src/components/settings/market-price-form-dialog.tsx', 'src/hooks/use-market-prices.ts']
-code_patterns: ['react-hook-form FormField', 'TanStack Query useMutation', 'Supabase update by ID', 'normalizeTickerSymbol from @/lib/utils']
-test_patterns: ['Playwright MCP — navigate /settings/market-prices, click edit, type, assert field enabled + value saved']
+tech_stack:
+  ['Next.js 16', 'React 19', 'TypeScript', 'react-hook-form', 'zod', 'TanStack Query', 'Supabase']
+files_to_modify:
+  ['src/components/settings/market-price-form-dialog.tsx', 'src/hooks/use-market-prices.ts']
+code_patterns:
+  [
+    'react-hook-form FormField',
+    'TanStack Query useMutation',
+    'Supabase update by ID',
+    'normalizeTickerSymbol from @/lib/utils',
+  ]
+test_patterns:
+  [
+    'Playwright MCP — navigate /settings/market-prices, click edit, type, assert field enabled + value saved',
+  ]
 ---
 
 # Tech-Spec: Enable Ticker Symbol Editing in Update Price Dialog
@@ -29,12 +40,14 @@ Trong dialog "Cập nhật giá" (`MarketPriceFormDialog`), khi `isEditing = tru
 ### Scope
 
 **In Scope:**
+
 - Enable field `ticker_symbol` khi editing (gold/stock/ETF)
 - Update submit logic gửi `ticker_symbol` theo ID (update in-place)
 - `asset_type` Select vẫn disabled khi editing (không thay đổi)
 - savings fields (bank_name, term_months, interest_rate) không thay đổi
 
 **Out of Scope:**
+
 - Thay đổi logic create market price
 - Thay đổi upsert conflict strategy
 - Enable `asset_type` select khi editing
@@ -52,12 +65,12 @@ Trong dialog "Cập nhật giá" (`MarketPriceFormDialog`), khi `isEditing = tru
 
 ### Files to Reference
 
-| File | Purpose |
-| ---- | ------- |
-| `src/components/settings/market-price-form-dialog.tsx` | File sửa chính: bỏ `disabled`, cập nhật `onSubmit` |
-| `src/hooks/use-market-prices.ts` | Thêm `ticker_symbol?: string \| null` vào `useUpdateMarketPrice` type |
-| `src/lib/utils.ts` | `normalizeTickerSymbol()` — đã có, dùng lại |
-| `src/types/database.ts` | `MarketPrice.ticker_symbol?: string \| null` — reference only |
+| File                                                   | Purpose                                                               |
+| ------------------------------------------------------ | --------------------------------------------------------------------- |
+| `src/components/settings/market-price-form-dialog.tsx` | File sửa chính: bỏ `disabled`, cập nhật `onSubmit`                    |
+| `src/hooks/use-market-prices.ts`                       | Thêm `ticker_symbol?: string \| null` vào `useUpdateMarketPrice` type |
+| `src/lib/utils.ts`                                     | `normalizeTickerSymbol()` — đã có, dùng lại                           |
+| `src/types/database.ts`                                | `MarketPrice.ticker_symbol?: string \| null` — reference only         |
 
 ### Technical Decisions
 
@@ -123,6 +136,7 @@ Trong dialog "Cập nhật giá" (`MarketPriceFormDialog`), khi `isEditing = tru
 ```
 
 **Manual check:**
+
 - Mở dialog edit savings record → bank_name, term_months editable bình thường
 - dropdown "Loại tài sản" vẫn disabled với mọi loại
 

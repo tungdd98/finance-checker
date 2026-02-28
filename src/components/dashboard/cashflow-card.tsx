@@ -21,7 +21,7 @@ export function CashflowCard() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="text-muted-foreground text-sm font-medium">
           Dòng tiền tháng {format(month, 'MM/yyyy', { locale: vi })}
         </CardTitle>
       </CardHeader>
@@ -39,7 +39,7 @@ export function CashflowCard() {
           <>
             {/* Net cashflow */}
             <div
-              className={`text-2xl font-bold mb-4 ${
+              className={`mb-4 text-2xl font-bold ${
                 (data?.net ?? 0) >= 0
                   ? 'text-green-600 dark:text-green-400'
                   : 'text-red-600 dark:text-red-400'
@@ -51,8 +51,8 @@ export function CashflowCard() {
 
             {/* Breakdown */}
             <div className="grid grid-cols-3 gap-3">
-              <div className="bg-green-50 dark:bg-green-950/30 rounded-lg p-2">
-                <div className="flex items-center gap-1 text-green-600 dark:text-green-400 mb-1">
+              <div className="rounded-lg bg-green-50 p-2 dark:bg-green-950/30">
+                <div className="mb-1 flex items-center gap-1 text-green-600 dark:text-green-400">
                   <TrendingUp className="h-3 w-3" />
                   <span className="text-xs">Thu</span>
                 </div>
@@ -61,8 +61,8 @@ export function CashflowCard() {
                 </div>
               </div>
 
-              <div className="bg-red-50 dark:bg-red-950/30 rounded-lg p-2">
-                <div className="flex items-center gap-1 text-red-600 dark:text-red-400 mb-1">
+              <div className="rounded-lg bg-red-50 p-2 dark:bg-red-950/30">
+                <div className="mb-1 flex items-center gap-1 text-red-600 dark:text-red-400">
                   <TrendingDown className="h-3 w-3" />
                   <span className="text-xs">Chi</span>
                 </div>
@@ -71,8 +71,8 @@ export function CashflowCard() {
                 </div>
               </div>
 
-              <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-2">
-                <div className="flex items-center gap-1 text-blue-600 dark:text-blue-400 mb-1">
+              <div className="rounded-lg bg-blue-50 p-2 dark:bg-blue-950/30">
+                <div className="mb-1 flex items-center gap-1 text-blue-600 dark:text-blue-400">
                   <ArrowRightLeft className="h-3 w-3" />
                   <span className="text-xs">Đầu tư</span>
                 </div>

@@ -26,7 +26,7 @@ export function GoalProgressCard() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+        <CardTitle className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
           <Target className="h-4 w-4" />
           Mục tiêu
         </CardTitle>
@@ -40,20 +40,20 @@ export function GoalProgressCard() {
           </div>
         ) : goal ? (
           <div className="space-y-3">
-            <div className="font-semibold text-base">{goal.name}</div>
+            <div className="text-base font-semibold">{goal.name}</div>
             <Progress value={progress} className="h-3" />
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">
                 {formatVND(totalAssets)}₫ / {formatVND(goal.target_amount)}₫
               </span>
-              <span className="font-bold text-primary">{progress.toFixed(1)}%</span>
+              <span className="text-primary font-bold">{progress.toFixed(1)}%</span>
             </div>
           </div>
         ) : (
-          <div className="text-center py-4">
-            <div className="text-3xl mb-2">🎯</div>
-            <p className="text-sm text-muted-foreground">Chưa có mục tiêu</p>
-            <p className="text-xs text-muted-foreground mt-1">Thêm mục tiêu tài chính của bạn</p>
+          <div className="py-4 text-center">
+            <div className="mb-2 text-3xl">🎯</div>
+            <p className="text-muted-foreground text-sm">Chưa có mục tiêu</p>
+            <p className="text-muted-foreground mt-1 text-xs">Thêm mục tiêu tài chính của bạn</p>
           </div>
         )}
       </CardContent>

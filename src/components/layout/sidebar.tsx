@@ -33,6 +33,7 @@ export function Sidebar() {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), [])
 
   const handleLogout = async () => {
@@ -43,20 +44,20 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="hidden md:flex flex-col w-60 h-screen fixed left-0 top-0 bg-background border-r border-border z-30">
+    <aside className="bg-background border-border fixed top-0 left-0 z-30 hidden h-screen w-60 flex-col border-r md:flex">
       {/* Logo */}
-      <div className="flex items-center gap-2 px-4 py-5 border-b border-border">
+      <div className="border-border flex items-center gap-2 border-b px-4 py-5">
         <div className="bg-primary rounded-lg p-1.5">
-          <Logo className="h-5 w-5 text-primary-foreground" />
+          <Logo className="text-primary-foreground h-5 w-5" />
         </div>
         <div>
-          <div className="font-bold text-sm leading-none">Finance CC</div>
-          <div className="text-xs text-muted-foreground mt-0.5">Command Center</div>
+          <div className="text-sm leading-none font-bold">Finance CC</div>
+          <div className="text-muted-foreground mt-0.5 text-xs">Command Center</div>
         </div>
       </div>
 
       {/* Nav Items */}
-      <nav className="flex-1 px-2 py-4 space-y-1">
+      <nav className="flex-1 space-y-1 px-2 py-4">
         {navItems.map((item) => {
           const isActive = pathname === item.href
           const Icon = item.icon
@@ -66,7 +67,7 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-sm',
+                'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
                 isActive
                   ? 'bg-primary text-primary-foreground font-medium'
                   : 'text-muted-foreground hover:bg-muted hover:text-foreground'
@@ -80,11 +81,11 @@ export function Sidebar() {
       </nav>
 
       {/* Bottom actions */}
-      <div className="px-2 py-4 border-t border-border space-y-1">
+      <div className="border-border space-y-1 border-t px-2 py-4">
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start gap-3 text-muted-foreground"
+          className="text-muted-foreground w-full justify-start gap-3"
           onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
         >
           {mounted && resolvedTheme === 'dark' ? (
@@ -97,7 +98,7 @@ export function Sidebar() {
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start gap-3 text-muted-foreground hover:text-destructive"
+          className="text-muted-foreground hover:text-destructive w-full justify-start gap-3"
           onClick={handleLogout}
         >
           <LogOut className="h-4 w-4" />

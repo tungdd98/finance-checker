@@ -109,9 +109,10 @@ export function useTotalAssets() {
           : null
 
         // Fallback to cost basis when no market price available
-        const currentValue = (marketPrice && marketPrice.price_per_unit != null)
-          ? holding.total_quantity * marketPrice.price_per_unit
-          : holding.total_cost_basis
+        const currentValue =
+          marketPrice && marketPrice.price_per_unit != null
+            ? holding.total_quantity * marketPrice.price_per_unit
+            : holding.total_cost_basis
         return sum + currentValue
       }, 0)
 

@@ -4,10 +4,7 @@ import type { Category, TransactionType } from '@/types/database'
 
 async function fetchCategories(): Promise<Category[]> {
   const supabase = createClient()
-  const { data, error } = await supabase
-    .from('categories')
-    .select('*')
-    .order('name')
+  const { data, error } = await supabase.from('categories').select('*').order('name')
 
   if (error) throw error
   return data ?? []

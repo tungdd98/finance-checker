@@ -5,10 +5,7 @@ import type { CashBalance } from '@/types/database'
 async function fetchCashBalance(): Promise<CashBalance> {
   const supabase = createClient()
 
-  const { data, error } = await supabase
-    .from('cash_balance')
-    .select('*')
-    .single()
+  const { data, error } = await supabase.from('cash_balance').select('*').single()
 
   if (error) throw error
 

@@ -4,7 +4,7 @@ import type { Transaction, TransactionType, TransactionDirection } from '@/types
 import { startOfMonth, endOfMonth, format } from 'date-fns'
 
 interface TransactionFilters {
-  month?: Date        // if omitted → no date range filter (all time)
+  month?: Date // if omitted → no date range filter (all time)
   type?: TransactionType | 'all'
   category_id?: string
   limit?: number

@@ -19,7 +19,7 @@ export function AssetsSummaryCard() {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+        <CardTitle className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
           <Wallet className="h-4 w-4" />
           Tổng tài sản
         </CardTitle>
@@ -33,9 +33,7 @@ export function AssetsSummaryCard() {
         ) : (
           <div>
             <div className="text-2xl font-bold">{formatVND(totalAssets)}</div>
-            <div className="text-xs text-muted-foreground mt-1">
-              Giá trị thị trường hiện tại
-            </div>
+            <div className="text-muted-foreground mt-1 text-xs">Giá trị thị trường hiện tại</div>
           </div>
         )}
       </CardContent>
