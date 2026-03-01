@@ -34,11 +34,16 @@ function formatVND(amount: number): string {
 
 function typeColor(type: string): string {
   switch (type) {
-    case 'income': return 'text-green-600 dark:text-green-400'
-    case 'expense': return 'text-red-600 dark:text-red-400'
-    case 'investment': return 'text-blue-600 dark:text-blue-400'
-    case 'transfer': return 'text-purple-600 dark:text-purple-400'
-    default: return 'text-foreground'
+    case 'income':
+      return 'text-green-600 dark:text-green-400'
+    case 'expense':
+      return 'text-red-600 dark:text-red-400'
+    case 'investment':
+      return 'text-blue-600 dark:text-blue-400'
+    case 'transfer':
+      return 'text-purple-600 dark:text-purple-400'
+    default:
+      return 'text-foreground'
   }
 }
 
@@ -58,30 +63,32 @@ interface TransactionCardProps {
 
 function TransactionCard({ transaction, onEdit, onDelete }: TransactionCardProps) {
   return (
-    <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors group">
+    <div className="hover:bg-muted/50 group flex items-center gap-3 rounded-lg p-3 transition-colors">
       {/* Icon */}
       <div
-        className="h-10 w-10 rounded-full flex items-center justify-center text-lg shrink-0"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg"
         style={{ backgroundColor: (transaction.category?.color ?? '#6366f1') + '20' }}
       >
         {transaction.category?.icon ?? '💰'}
       </div>
 
       {/* Info */}
-      <div className="flex-1 min-w-0">
-        <div className="font-medium text-sm truncate flex items-center gap-1.5">
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-1.5 truncate text-sm font-medium">
           {transaction.category?.name ?? 'Không rõ'}
           {transaction.type === 'investment' && transaction.transaction_direction && (
-            <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full shrink-0 ${
-              transaction.transaction_direction === 'buy'
-                ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300'
-                : 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300'
-            }`}>
+            <span
+              className={`shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-semibold ${
+                transaction.transaction_direction === 'buy'
+                  ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300'
+                  : 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300'
+              }`}
+            >
               {transaction.transaction_direction === 'buy' ? 'Mua' : 'Bán'}
             </span>
           )}
         </div>
-        <div className="text-xs text-muted-foreground flex items-center gap-1 flex-wrap">
+        <div className="text-muted-foreground flex flex-wrap items-center gap-1 text-xs">
           {format(new Date(transaction.transaction_date), 'dd/MM/yyyy', { locale: vi })}
           {transaction.type === 'investment' && transaction.quantity && transaction.unit_price && (
             <>
@@ -89,23 +96,24 @@ function TransactionCard({ transaction, onEdit, onDelete }: TransactionCardProps
               <span className="shrink-0">
                 {transaction.quantity % 1 === 0
                   ? transaction.quantity
-                  : transaction.quantity.toFixed(2)
-                } × {formatVND(transaction.unit_price)}
+                  : transaction.quantity.toFixed(2)}{' '}
+                × {formatVND(transaction.unit_price)}
               </span>
             </>
           )}
           {transaction.notes && (
             <>
               <span>·</span>
-              <span className="truncate max-w-40">{transaction.notes}</span>
+              <span className="max-w-40 truncate">{transaction.notes}</span>
             </>
           )}
         </div>
       </div>
 
       {/* Amount */}
-      <div className={`font-semibold text-sm shrink-0 ${typeColor(transaction.type)}`}>
-        {getAmountSign(transaction)}{formatVND(transaction.amount)}
+      <div className={`shrink-0 text-sm font-semibold ${typeColor(transaction.type)}`}>
+        {getAmountSign(transaction)}
+        {formatVND(transaction.amount)}
       </div>
 
       {/* Actions */}
@@ -114,7 +122,7 @@ function TransactionCard({ transaction, onEdit, onDelete }: TransactionCardProps
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+            className="h-8 w-8 shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
           >
             <MoreVertical className="h-4 w-4" />
           </Button>
@@ -192,8 +200,8 @@ export function TransactionList({ transactions, isLoading, groupByMonth }: Trans
 
   if (transactions.length === 0) {
     return (
-      <div className="text-center py-12 text-muted-foreground">
-        <div className="text-4xl mb-3">📭</div>
+      <div className="text-muted-foreground py-12 text-center">
+        <div className="mb-3 text-4xl">📭</div>
         <p className="text-sm">Chưa có giao dịch nào</p>
       </div>
     )
@@ -206,15 +214,15 @@ export function TransactionList({ transactions, isLoading, groupByMonth }: Trans
         <div>
           {monthGroups.map((group) => (
             <div key={group.key}>
-              <div className="px-3 py-2 bg-muted/40 border-b border-border">
-                <span className="text-xs font-semibold text-muted-foreground capitalize">
+              <div className="bg-muted/40 border-border border-b px-3 py-2">
+                <span className="text-muted-foreground text-xs font-semibold capitalize">
                   {group.label}
                 </span>
-                <span className="text-xs text-muted-foreground ml-2">
+                <span className="text-muted-foreground ml-2 text-xs">
                   · {group.items.length} giao dịch
                 </span>
               </div>
-              <div className="divide-y divide-border">
+              <div className="divide-border divide-y">
                 {group.items.map((t) => (
                   <TransactionCard
                     key={t.id}
@@ -229,7 +237,7 @@ export function TransactionList({ transactions, isLoading, groupByMonth }: Trans
         </div>
       ) : (
         // Month view: flat list
-        <div className="divide-y divide-border">
+        <div className="divide-border divide-y">
           {transactions.map((t) => (
             <TransactionCard
               key={t.id}
@@ -266,11 +274,7 @@ export function TransactionList({ transactions, isLoading, groupByMonth }: Trans
               onClick={handleDelete}
               disabled={deleteMutation.isPending}
             >
-              {deleteMutation.isPending ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                'Xoá'
-              )}
+              {deleteMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Xoá'}
             </Button>
           </DialogFooter>
         </DialogContent>

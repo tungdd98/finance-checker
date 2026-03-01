@@ -6,11 +6,7 @@ import { vi } from 'date-fns/locale'
 import { Plus, ChevronLeft, ChevronRight, CalendarDays, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import {
   Select,
   SelectContent,
@@ -26,7 +22,20 @@ import type { TransactionType } from '@/types/database'
 
 type FilterType = TransactionType | 'all'
 
-const MONTH_LABELS = ['Th1','Th2','Th3','Th4','Th5','Th6','Th7','Th8','Th9','Th10','Th11','Th12']
+const MONTH_LABELS = [
+  'Th1',
+  'Th2',
+  'Th3',
+  'Th4',
+  'Th5',
+  'Th6',
+  'Th7',
+  'Th8',
+  'Th9',
+  'Th10',
+  'Th11',
+  'Th12',
+]
 
 const TYPE_LABEL: Record<string, string> = {
   income: 'Thu nhập',
@@ -47,6 +56,7 @@ export default function TransactionsPage() {
 
   // Sync picker year to currentMonth when popover opens
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (pickerOpen) setPickerYear(currentMonth.getFullYear())
   }, [pickerOpen, currentMonth])
 
@@ -56,6 +66,7 @@ export default function TransactionsPage() {
     if (!categoryFilter) return
     const cat = allCategories.find((c) => c.id === categoryFilter)
     if (cat && filterType !== 'all' && cat.type !== filterType) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCategoryFilter('')
     }
   }, [filterType, categoryFilter, allCategories])
@@ -72,15 +83,12 @@ export default function TransactionsPage() {
     category_id: categoryFilter || undefined,
   })
 
-  const prevMonth = () =>
-    setCurrentMonth((d) => new Date(d.getFullYear(), d.getMonth() - 1, 1))
+  const prevMonth = () => setCurrentMonth((d) => new Date(d.getFullYear(), d.getMonth() - 1, 1))
 
-  const nextMonth = () =>
-    setCurrentMonth((d) => new Date(d.getFullYear(), d.getMonth() + 1, 1))
+  const nextMonth = () => setCurrentMonth((d) => new Date(d.getFullYear(), d.getMonth() + 1, 1))
 
   const now = new Date()
-  const isCurrentMonth =
-    format(currentMonth, 'yyyy-MM') === format(now, 'yyyy-MM')
+  const isCurrentMonth = format(currentMonth, 'yyyy-MM') === format(now, 'yyyy-MM')
 
   const handleMonthSelect = (month: number) => {
     setCurrentMonth(new Date(pickerYear, month, 1))
@@ -88,38 +96,31 @@ export default function TransactionsPage() {
   }
 
   const isMonthDisabled = (month: number) =>
-    pickerYear > now.getFullYear() ||
-    (pickerYear === now.getFullYear() && month > now.getMonth())
+    pickerYear > now.getFullYear() || (pickerYear === now.getFullYear() && month > now.getMonth())
 
   const isMonthSelected = (month: number) =>
-    pickerYear === currentMonth.getFullYear() &&
-    month === currentMonth.getMonth()
+    pickerYear === currentMonth.getFullYear() && month === currentMonth.getMonth()
 
   return (
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Giao dịch</h1>
-        <Button onClick={() => setDialogOpen(true)} className="hidden md:flex gap-2">
+        <Button onClick={() => setDialogOpen(true)} className="hidden gap-2 md:flex">
           <Plus className="h-4 w-4" />
           Thêm
         </Button>
       </div>
 
       {/* Month navigator */}
-      <div className="flex items-center justify-between bg-card rounded-xl border border-border p-3">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={prevMonth}
-          disabled={isAllTime}
-        >
+      <div className="bg-card border-border flex items-center justify-between rounded-xl border p-3">
+        <Button variant="ghost" size="icon" onClick={prevMonth} disabled={isAllTime}>
           <ChevronLeft className="h-4 w-4" />
         </Button>
 
         {isAllTime ? (
           // All-time mode: show label + clear button
-          <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm font-medium">
             <CalendarDays className="h-4 w-4" />
             <span>Tất cả thời gian</span>
             <Button
@@ -137,15 +138,15 @@ export default function TransactionsPage() {
             <PopoverTrigger asChild>
               <Button
                 variant="ghost"
-                className="font-semibold capitalize gap-2 hover:bg-muted px-3"
+                className="hover:bg-muted gap-2 px-3 font-semibold capitalize"
               >
-                <CalendarDays className="h-4 w-4 text-muted-foreground" />
+                <CalendarDays className="text-muted-foreground h-4 w-4" />
                 {format(currentMonth, 'MMMM yyyy', { locale: vi })}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-64 p-3" align="center">
               {/* Year navigator */}
-              <div className="flex items-center justify-between mb-3">
+              <div className="mb-3 flex items-center justify-between">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -154,7 +155,7 @@ export default function TransactionsPage() {
                 >
                   <ChevronLeft className="h-3 w-3" />
                 </Button>
-                <span className="font-semibold text-sm">{pickerYear}</span>
+                <span className="text-sm font-semibold">{pickerYear}</span>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -197,17 +198,25 @@ export default function TransactionsPage() {
       {/* Type filter */}
       <Tabs value={filterType} onValueChange={(v) => setFilterType(v as FilterType)}>
         <TabsList className="w-full">
-          <TabsTrigger value="all" className="flex-1">Tất cả</TabsTrigger>
-          <TabsTrigger value="income" className="flex-1">Thu</TabsTrigger>
-          <TabsTrigger value="expense" className="flex-1">Chi</TabsTrigger>
-          <TabsTrigger value="investment" className="flex-1">Đầu tư</TabsTrigger>
+          <TabsTrigger value="all" className="flex-1">
+            Tất cả
+          </TabsTrigger>
+          <TabsTrigger value="income" className="flex-1">
+            Thu
+          </TabsTrigger>
+          <TabsTrigger value="expense" className="flex-1">
+            Chi
+          </TabsTrigger>
+          <TabsTrigger value="investment" className="flex-1">
+            Đầu tư
+          </TabsTrigger>
         </TabsList>
       </Tabs>
 
       {/* Category filter */}
       {visibleCategories.length > 0 && (
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground shrink-0">Danh mục:</span>
+          <span className="text-muted-foreground shrink-0 text-sm">Danh mục:</span>
           <Select
             value={categoryFilter || 'all'}
             onValueChange={(v) => setCategoryFilter(v === 'all' ? '' : v)}
@@ -222,7 +231,7 @@ export default function TransactionsPage() {
                   <span className="flex items-center gap-2">
                     {cat.icon && <span>{cat.icon}</span>}
                     {cat.name}
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-muted-foreground text-xs">
                       ({TYPE_LABEL[cat.type] ?? cat.type})
                     </span>
                   </span>
@@ -234,7 +243,7 @@ export default function TransactionsPage() {
       )}
 
       {/* Transaction list */}
-      <div className="bg-card rounded-xl border border-border overflow-hidden">
+      <div className="bg-card border-border overflow-hidden rounded-xl border">
         <TransactionList
           transactions={transactions}
           isLoading={isLoading}

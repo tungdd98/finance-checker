@@ -72,7 +72,13 @@ export function useSetOpeningBalance() {
         } else {
           const { data: created, error } = await supabase
             .from('categories')
-            .insert({ name: CATEGORY_NAME, type: 'income', icon: '🏦', color: '#22c55e', is_default: true })
+            .insert({
+              name: CATEGORY_NAME,
+              type: 'income',
+              icon: '🏦',
+              color: '#22c55e',
+              is_default: true,
+            })
             .select('id')
             .single()
           if (error) throw error

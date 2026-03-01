@@ -29,10 +29,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
-import {
-  useCreateMarketPrice,
-  useUpdateMarketPrice,
-} from '@/hooks/use-market-prices'
+import { useCreateMarketPrice, useUpdateMarketPrice } from '@/hooks/use-market-prices'
 import type { MarketPrice } from '@/types/database'
 import { normalizeTickerSymbol } from '@/lib/utils'
 
@@ -78,9 +75,7 @@ const formSchema = z
           path: ['price_per_unit'],
         })
       } else {
-        const num = parseFloat(
-          data.price_per_unit.replace(/\./g, '').replace(',', '.')
-        )
+        const num = parseFloat(data.price_per_unit.replace(/\./g, '').replace(',', '.'))
         if (isNaN(num) || num <= 0) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -143,9 +138,7 @@ export function MarketPriceFormDialog({
           asset_type: 'savings',
           bank_name: editingPrice.bank_name || '',
           term_months: editingPrice.term_months ? String(editingPrice.term_months) : '',
-          interest_rate: editingPrice.interest_rate
-            ? String(editingPrice.interest_rate)
-            : '',
+          interest_rate: editingPrice.interest_rate ? String(editingPrice.interest_rate) : '',
           ticker_symbol: '',
           price_per_unit: '',
         })
@@ -227,9 +220,7 @@ export function MarketPriceFormDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>
-            {isEditing ? 'Cập nhật giá' : 'Thêm giá mới'}
-          </DialogTitle>
+          <DialogTitle>{isEditing ? 'Cập nhật giá' : 'Thêm giá mới'}</DialogTitle>
           <DialogDescription>
             {isEditing
               ? 'Cập nhật thông tin thị trường'
@@ -246,11 +237,7 @@ export function MarketPriceFormDialog({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Loại tài sản</FormLabel>
-                  <Select
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    disabled={isEditing}
-                  >
+                  <Select value={field.value} onValueChange={field.onChange} disabled={isEditing}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Chọn loại tài sản..." />
@@ -298,13 +285,7 @@ export function MarketPriceFormDialog({
                     <FormItem>
                       <FormLabel>Kỳ hạn (tháng)</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          type="number"
-                          min="1"
-                          placeholder="12"
-                          className="h-11"
-                        />
+                        <Input {...field} type="number" min="1" placeholder="12" className="h-11" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -353,7 +334,7 @@ export function MarketPriceFormDialog({
                           }}
                         />
                       </FormControl>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         Để trống nếu áp dụng chung cho loại tài sản
                       </p>
                       <FormMessage />
@@ -373,7 +354,7 @@ export function MarketPriceFormDialog({
                           {...field}
                           autoFocus
                           placeholder="0"
-                          className="h-12 text-xl font-bold text-right"
+                          className="h-12 text-right text-xl font-bold"
                           inputMode="numeric"
                           onChange={(e) => {
                             field.onChange(formatAmountDisplay(e.target.value))
@@ -387,9 +368,7 @@ export function MarketPriceFormDialog({
               </>
             )}
 
-            {submitError && (
-              <p className="text-sm text-destructive">{submitError}</p>
-            )}
+            {submitError && <p className="text-destructive text-sm">{submitError}</p>}
 
             <div className="flex gap-2 pt-2">
               <Button

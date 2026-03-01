@@ -31,10 +31,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { MarketPriceFormDialog } from '@/components/settings/market-price-form-dialog'
-import {
-  useMarketPrices,
-  useDeleteMarketPrice,
-} from '@/hooks/use-market-prices'
+import { useMarketPrices, useDeleteMarketPrice } from '@/hooks/use-market-prices'
 import type { MarketPrice } from '@/types/database'
 import { format } from 'date-fns'
 import { vi } from 'date-fns/locale'
@@ -116,15 +113,13 @@ export default function MarketPricesPage() {
             ))}
           </SelectContent>
         </Select>
-        <span className="text-sm text-muted-foreground">
-          {filteredPrices.length} kết quả
-        </span>
+        <span className="text-muted-foreground text-sm">{filteredPrices.length} kết quả</span>
       </div>
 
       {/* Table */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-base">
             <TrendingUp className="h-4 w-4" />
             Danh sách giá
           </CardTitle>
@@ -137,9 +132,9 @@ export default function MarketPricesPage() {
               ))}
             </div>
           ) : filteredPrices.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="text-muted-foreground py-8 text-center">
               <p className="text-sm">Chưa có giá nào</p>
-              <p className="text-xs mt-1">Thêm giá thị trường để bắt đầu</p>
+              <p className="mt-1 text-xs">Thêm giá thị trường để bắt đầu</p>
             </div>
           ) : (
             <div className="rounded-md border">
@@ -160,17 +155,13 @@ export default function MarketPricesPage() {
                         {ASSET_TYPE_LABELS[price.asset_type]}
                       </TableCell>
                       <TableCell>
-                        {price.asset_type === 'savings' ? (
-                          price.bank_name || (
-                            <span className="text-muted-foreground italic">—</span>
-                          )
-                        ) : (
-                          price.ticker_symbol || (
-                            <span className="text-muted-foreground italic">
-                              Chung
-                            </span>
-                          )
-                        )}
+                        {price.asset_type === 'savings'
+                          ? price.bank_name || (
+                              <span className="text-muted-foreground italic">—</span>
+                            )
+                          : price.ticker_symbol || (
+                              <span className="text-muted-foreground italic">Chung</span>
+                            )}
                       </TableCell>
                       <TableCell className="text-right font-mono">
                         {price.asset_type === 'savings' ? (
@@ -183,28 +174,16 @@ export default function MarketPricesPage() {
                           <span className="text-muted-foreground italic">—</span>
                         )}
                       </TableCell>
-                      <TableCell className="text-sm text-muted-foreground">
-                        {format(
-                          new Date(price.updated_at),
-                          'dd/MM/yyyy HH:mm',
-                          { locale: vi }
-                        )}
+                      <TableCell className="text-muted-foreground text-sm">
+                        {format(new Date(price.updated_at), 'dd/MM/yyyy HH:mm', { locale: vi })}
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleEdit(price)}
-                          >
+                          <Button variant="ghost" size="sm" onClick={() => handleEdit(price)}>
                             <Pencil className="h-3 w-3" />
                           </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setDeletingPrice(price)}
-                          >
-                            <Trash2 className="h-3 w-3 text-destructive" />
+                          <Button variant="ghost" size="sm" onClick={() => setDeletingPrice(price)}>
+                            <Trash2 className="text-destructive h-3 w-3" />
                           </Button>
                         </div>
                       </TableCell>
@@ -225,10 +204,7 @@ export default function MarketPricesPage() {
       />
 
       {/* Delete Confirmation */}
-      <AlertDialog
-        open={!!deletingPrice}
-        onOpenChange={() => setDeletingPrice(null)}
-      >
+      <AlertDialog open={!!deletingPrice} onOpenChange={() => setDeletingPrice(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Xác nhận xóa</AlertDialogTitle>

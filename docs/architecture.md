@@ -96,18 +96,21 @@ src/
 ## Layer Architecture
 
 ### 1. Presentation Layer (`src/app/`, `src/components/`)
+
 - **Server Components mặc định** — Next.js App Router
 - **Client Components** được đánh dấu `'use client'` khi cần state/hooks
 - **Dashboard layout** là Client Component (quản lý FAB + Dialog open state)
 - **shadcn/ui** cung cấp UI primitives (button, card, dialog, drawer, form...)
 
 ### 2. Data Access Layer (`src/hooks/`)
+
 - **TanStack Query** quản lý toàn bộ server state
 - Mỗi hook file export: `use<Entity>` (read) + `useCreate/Update/Delete<Entity>` (mutations)
 - Mutations luôn invalidate relevant query keys khi success
 - **Không có custom API routes** — gọi Supabase trực tiếp từ client
 
 ### 3. Infrastructure Layer (`src/lib/supabase/`)
+
 - **Browser client**: dùng trong hooks + client components
 - **Server client**: dùng trong server components + proxy
 - Supabase xử lý: Auth, Database, RLS, Real-time (chưa dùng)
@@ -117,12 +120,14 @@ src/
 ## UI/UX Patterns
 
 ### Responsive Navigation
-| Viewport | Navigation |
-|----------|-----------|
-| Mobile (`< md`) | Bottom Nav (5 tabs) + FAB (thêm giao dịch) |
+
+| Viewport         | Navigation                                         |
+| ---------------- | -------------------------------------------------- |
+| Mobile (`< md`)  | Bottom Nav (5 tabs) + FAB (thêm giao dịch)         |
 | Desktop (`≥ md`) | Sidebar trái (60px left padding trên main content) |
 
 ### Dialog vs Drawer Pattern
+
 ```typescript
 const isMobile = useIsMobile() // resize listener
 // Mobile → Drawer (vaul) — slide up from bottom
@@ -130,6 +135,7 @@ const isMobile = useIsMobile() // resize listener
 ```
 
 ### Theme Hydration (Anti-flash)
+
 ```typescript
 // ĐÚNG — luôn dùng pattern này
 const [mounted, setMounted] = useState(false)
@@ -146,6 +152,7 @@ const { theme } = useTheme() // KHÔNG dùng trực tiếp
 ## State Management
 
 ### Server State (TanStack Query)
+
 - **Cache keys:**
   ```
   ['transactions', filters]
@@ -161,6 +168,7 @@ const { theme } = useTheme() // KHÔNG dùng trực tiếp
 - Mutations invalidate: `useCreateTransaction` invalidates `transactions`, `asset-holdings`, `cash-balance`, `dashboard-stats`
 
 ### Local State (React useState)
+
 - Dialog/Drawer open state (trong Dashboard layout)
 - Form state (react-hook-form)
 - Month filter (transactions page)
@@ -170,16 +178,19 @@ const { theme } = useTheme() // KHÔNG dùng trực tiếp
 ## Auth & Security
 
 ### Authentication
+
 - **Supabase Auth** — email/password
 - Users tạo thủ công qua Supabase Auth dashboard (single-family app)
 - Session lưu trong cookies (managed by Supabase SSR)
 
 ### Authorization
+
 - **Row Level Security (RLS)** — bật trên tất cả tables
 - Policy: `Authenticated users full access` — tất cả authenticated users có full access
 - Phù hợp với single-family model (2 users dùng chung data)
 
 ### Proxy/Middleware
+
 ```typescript
 // src/proxy.ts — KHÔNG phải middleware.ts
 export async function proxy(request: NextRequest) { ... }

@@ -29,15 +29,15 @@ Xem chi tiết: [`docs/development-guide.md`](docs/development-guide.md)
 
 ## Tài liệu dự án
 
-| Tài liệu | Mô tả |
-|---------|-------|
-| [`docs/index.md`](docs/index.md) | Entry point — index toàn bộ docs |
-| [`docs/architecture.md`](docs/architecture.md) | Request flow, layers, auth, state |
-| [`docs/data-models.md`](docs/data-models.md) | DB schema, TypeScript types |
-| [`docs/api-contracts.md`](docs/api-contracts.md) | Tất cả Supabase hooks |
-| [`docs/component-inventory.md`](docs/component-inventory.md) | 30+ components |
-| [`docs/development-guide.md`](docs/development-guide.md) | Setup, commands, conventions |
-| [`CLAUDE.md`](CLAUDE.md) | Hướng dẫn conventions cho Claude Code |
+| Tài liệu                                                     | Mô tả                                 |
+| ------------------------------------------------------------ | ------------------------------------- |
+| [`docs/index.md`](docs/index.md)                             | Entry point — index toàn bộ docs      |
+| [`docs/architecture.md`](docs/architecture.md)               | Request flow, layers, auth, state     |
+| [`docs/data-models.md`](docs/data-models.md)                 | DB schema, TypeScript types           |
+| [`docs/api-contracts.md`](docs/api-contracts.md)             | Tất cả Supabase hooks                 |
+| [`docs/component-inventory.md`](docs/component-inventory.md) | 30+ components                        |
+| [`docs/development-guide.md`](docs/development-guide.md)     | Setup, commands, conventions          |
+| [`CLAUDE.md`](CLAUDE.md)                                     | Hướng dẫn conventions cho Claude Code |
 
 ---
 
@@ -47,11 +47,11 @@ Project này tích hợp [BMAD Method](https://github.com/bmadcode/bmad-method) 
 
 ### Chọn quy trình phù hợp
 
-| Quy mô task | Ví dụ | Quy trình |
-|-------------|-------|-----------|
-| **Nhỏ / Trung** | Sửa bug, enable/disable field, thêm validation, tweak UI | Quick Flow |
-| **Lớn** | Tính năng mới hoàn chỉnh, thay đổi architecture, multi-page feature | Full BMad Flow |
-| **Research** | Phân tích cạnh tranh, brainstorm ý tưởng, technical spike | Research Workflows |
+| Quy mô task     | Ví dụ                                                               | Quy trình          |
+| --------------- | ------------------------------------------------------------------- | ------------------ |
+| **Nhỏ / Trung** | Sửa bug, enable/disable field, thêm validation, tweak UI            | Quick Flow         |
+| **Lớn**         | Tính năng mới hoàn chỉnh, thay đổi architecture, multi-page feature | Full BMad Flow     |
+| **Research**    | Phân tích cạnh tranh, brainstorm ý tưởng, technical spike           | Research Workflows |
 
 ---
 
@@ -136,16 +136,16 @@ Bước 5: Review & Retro
 
 Có thể gọi trực tiếp từng agent để có góc nhìn chuyên sâu:
 
-| Agent | Lệnh | Chuyên môn |
-|-------|------|-----------|
-| Product Manager | `/bmad-agent-bmm-pm` | PRD, requirements, prioritization |
-| Business Analyst | `/bmad-agent-bmm-analyst` | Research, user stories, acceptance criteria |
-| Architect | `/bmad-agent-bmm-architect` | Technical design, solution decisions |
-| UX Designer | `/bmad-agent-bmm-ux-designer` | UX patterns, design specs |
-| Developer | `/bmad-agent-bmm-dev` | Implementation, code review |
-| QA Engineer | `/bmad-agent-bmm-qa` | Test strategy, edge cases |
-| Scrum Master | `/bmad-agent-bmm-sm` | Sprint planning, sprint status |
-| Tech Writer | `/bmad-agent-bmm-tech-writer` | Documentation |
+| Agent            | Lệnh                          | Chuyên môn                                  |
+| ---------------- | ----------------------------- | ------------------------------------------- |
+| Product Manager  | `/bmad-agent-bmm-pm`          | PRD, requirements, prioritization           |
+| Business Analyst | `/bmad-agent-bmm-analyst`     | Research, user stories, acceptance criteria |
+| Architect        | `/bmad-agent-bmm-architect`   | Technical design, solution decisions        |
+| UX Designer      | `/bmad-agent-bmm-ux-designer` | UX patterns, design specs                   |
+| Developer        | `/bmad-agent-bmm-dev`         | Implementation, code review                 |
+| QA Engineer      | `/bmad-agent-bmm-qa`          | Test strategy, edge cases                   |
+| Scrum Master     | `/bmad-agent-bmm-sm`          | Sprint planning, sprint status              |
+| Tech Writer      | `/bmad-agent-bmm-tech-writer` | Documentation                               |
 
 ---
 

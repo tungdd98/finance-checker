@@ -11,16 +11,18 @@
 ## Hook: `use-transactions.ts`
 
 ### `useTransactions(filters?)`
+
 Query key: `['transactions', filters]`
 
 **Supabase query:**
+
 ```typescript
 supabase
   .from('transactions')
   .select('*, category:categories(*)')
   .is('deleted_at', null)
   .order('transaction_date', { ascending: false })
-  // + optional: gte/lte month range, eq type, eq category_id, limit
+// + optional: gte/lte month range, eq type, eq category_id, limit
 ```
 
 **Filters:**
@@ -32,9 +34,11 @@ supabase
 | `limit` | number | Giới hạn kết quả |
 
 ### `useCreateTransaction()`
+
 Invalidates: `['transactions']`, `['asset-holdings']`, `['cash-balance']`, `['dashboard-stats']`
 
 **Payload:**
+
 ```typescript
 {
   amount: number           // VND, > 0
@@ -54,9 +58,11 @@ Invalidates: `['transactions']`, `['asset-holdings']`, `['cash-balance']`, `['da
 ```
 
 ### `useUpdateTransaction()`
+
 Invalidates: same as Create
 
 ### `useDeleteTransaction(id)`
+
 **Pattern:** Soft delete — update `deleted_at = now()`
 Invalidates: same as Create
 
@@ -65,9 +71,11 @@ Invalidates: same as Create
 ## Hook: `use-dashboard-stats.ts`
 
 ### `useMonthlyCashflow(month?)`
+
 Query key: `['dashboard-stats', 'cashflow', 'yyyy-MM']`
 
 **Supabase query:**
+
 ```typescript
 supabase
   .from('transactions')
@@ -78,24 +86,30 @@ supabase
 ```
 
 **Returns:** `{ income, expense, investment, net }`
+
 - `net = income - expense - investment`
 
 ### `usePinnedGoal()`
+
 Query key: `['dashboard-stats', 'pinned-goal']`
 
 ```typescript
-supabase.from('goals')
+supabase
+  .from('goals')
   .select('*')
   .eq('show_on_dashboard', true)
   .is('achieved_at', null)
   .order('created_at', { ascending: false })
-  .limit(1).maybeSingle()
+  .limit(1)
+  .maybeSingle()
 ```
 
 ### `useTotalAssets()`
+
 Query key: `['dashboard-stats', 'total-assets']`
 
 Tính toán phức tạp (3 queries):
+
 1. `cash_balance` view → `{ balance }`
 2. `asset_holdings` view → array of holdings
 3. `market_prices` → array of prices
@@ -107,13 +121,16 @@ Tính toán phức tạp (3 queries):
 ## Hook: `use-asset-holdings.ts`
 
 ### `useAssetHoldings()`
+
 Query key: `['asset-holdings']`
 
 Queries:
+
 1. `asset_holdings` view (sorted by category_name)
 2. `market_prices` table
 
 **Enriches** holdings client-side với:
+
 - `current_market_price`
 - `current_value = quantity × marketPrice || costBasis`
 - `unrealized_pnl = currentValue - costBasis`
@@ -132,9 +149,11 @@ Queries:
 ## Hook: `use-goals.ts`
 
 ### `useGoals()`
+
 Query key: `['goals']`
 
 ### `useCreateGoal()`, `useUpdateGoal()`, `useDeleteGoal()`
+
 - Delete: Hard delete (`.delete()`)
 - Invalidates: `['goals']`, `['dashboard-stats']`
 
@@ -143,6 +162,7 @@ Query key: `['goals']`
 ## Hook: `use-categories.ts`
 
 ### `useCategories(type?)`
+
 Query key: `['categories', type]`
 
 Filter optional theo TransactionType.
@@ -152,13 +172,16 @@ Filter optional theo TransactionType.
 ## Hook: `use-market-prices.ts`
 
 ### `useMarketPrices()`
+
 Query key: `['market-prices']`
 
 ### `useUpsertMarketPrice()`
+
 **Upsert logic:**
+
 ```typescript
 supabase.from('market_prices').upsert(data, {
-  onConflict: 'asset_type,ticker_symbol'  // hoặc 'asset_type,bank_name,term_months'
+  onConflict: 'asset_type,ticker_symbol', // hoặc 'asset_type,bank_name,term_months'
 })
 ```
 
@@ -167,6 +190,7 @@ supabase.from('market_prices').upsert(data, {
 ## Hook: `use-cash-balance.ts`
 
 ### `useCashBalance()`
+
 Query key: `['cash-balance']`
 
 ```typescript
@@ -178,17 +202,18 @@ supabase.from('cash_balance').select('balance').single()
 ## Hook: `use-opening-balance.ts`
 
 ### `useOpeningBalance(month)`
+
 Tính số dư đầu kỳ cho tháng được chọn.
 
 ---
 
 ## Supabase Views
 
-| View | Mô tả |
-|------|-------|
-| `cash_balance` | Tổng income - expense - investment của tất cả transactions |
+| View             | Mô tả                                                        |
+| ---------------- | ------------------------------------------------------------ |
+| `cash_balance`   | Tổng income - expense - investment của tất cả transactions   |
 | `asset_holdings` | Aggregate investment transactions → avg cost basis per asset |
-| `market_prices` | Giá thị trường hiện tại (manual update) |
+| `market_prices`  | Giá thị trường hiện tại (manual update)                      |
 
 ---
 

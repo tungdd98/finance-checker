@@ -13,22 +13,22 @@ Family Finance Command Center là ứng dụng quản lý tài chính gia đình
 
 ## Tech Stack tóm tắt
 
-| Danh mục | Công nghệ | Phiên bản |
-|----------|-----------|-----------|
-| Framework | Next.js (App Router) | 16.1.6 |
-| Language | TypeScript | ^5 |
-| UI Library | React | 19.2.3 |
-| Styling | Tailwind CSS | ^4 |
-| UI Components | shadcn/ui (New York, Neutral) | ^3.8.5 |
-| Backend/DB | Supabase (PostgreSQL + Auth) | ^2.98.0 |
-| Server State | TanStack Query | ^5.90.21 |
-| Forms | react-hook-form + zod | ^7.71.2 / ^4.3.6 |
-| Date | date-fns | ^4.1.0 |
-| Icons | lucide-react | ^0.575.0 |
-| Charts | recharts | ^3.7.0 |
-| Theme | next-themes | ^0.4.6 |
-| Mobile Drawer | vaul | ^1.1.2 |
-| Deploy | Vercel | — |
+| Danh mục      | Công nghệ                     | Phiên bản        |
+| ------------- | ----------------------------- | ---------------- |
+| Framework     | Next.js (App Router)          | 16.1.6           |
+| Language      | TypeScript                    | ^5               |
+| UI Library    | React                         | 19.2.3           |
+| Styling       | Tailwind CSS                  | ^4               |
+| UI Components | shadcn/ui (New York, Neutral) | ^3.8.5           |
+| Backend/DB    | Supabase (PostgreSQL + Auth)  | ^2.98.0          |
+| Server State  | TanStack Query                | ^5.90.21         |
+| Forms         | react-hook-form + zod         | ^7.71.2 / ^4.3.6 |
+| Date          | date-fns                      | ^4.1.0           |
+| Icons         | lucide-react                  | ^0.575.0         |
+| Charts        | recharts                      | ^3.7.0           |
+| Theme         | next-themes                   | ^0.4.6           |
+| Mobile Drawer | vaul                          | ^1.1.2           |
+| Deploy        | Vercel                        | —                |
 
 ## Kiến trúc
 
@@ -42,6 +42,7 @@ Supabase Client SDK
 ```
 
 **Route Groups:**
+
 - `(auth)` → Public pages (không cần đăng nhập)
 - `(dashboard)` → Protected pages (bắt buộc đăng nhập)
 
@@ -49,14 +50,14 @@ Supabase Client SDK
 
 ## Các trang chính
 
-| Route | Mô tả |
-|-------|-------|
-| `/login` | Đăng nhập (public) |
-| `/` | Dashboard — Goal progress + Assets summary + Cashflow + Recent transactions |
-| `/transactions` | Danh sách giao dịch, filter theo tháng/loại |
-| `/assets` | Portfolio đầu tư — P&L, CRUD, cập nhật giá |
-| `/goals` | Mục tiêu tài chính — progress bars, pin to dashboard |
-| `/settings/market-prices` | Quản lý giá thị trường (vàng, cổ phiếu, ETF, tiết kiệm) |
+| Route                     | Mô tả                                                                       |
+| ------------------------- | --------------------------------------------------------------------------- |
+| `/login`                  | Đăng nhập (public)                                                          |
+| `/`                       | Dashboard — Goal progress + Assets summary + Cashflow + Recent transactions |
+| `/transactions`           | Danh sách giao dịch, filter theo tháng/loại                                 |
+| `/assets`                 | Portfolio đầu tư — P&L, CRUD, cập nhật giá                                  |
+| `/goals`                  | Mục tiêu tài chính — progress bars, pin to dashboard                        |
+| `/settings/market-prices` | Quản lý giá thị trường (vàng, cổ phiếu, ETF, tiết kiệm)                     |
 
 ## Tài liệu liên quan
 

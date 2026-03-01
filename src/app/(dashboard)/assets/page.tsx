@@ -61,10 +61,14 @@ function OpeningBalanceDialog({
   // Pre-fill when editing existing
   useEffect(() => {
     if (open && ob?.transaction) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAmount(parseInt(String(ob.transaction.amount)).toLocaleString('vi-VN'))
+       
       setDate(ob.transaction.transaction_date)
     } else if (open) {
+       
       setAmount('')
+       
       setDate(format(new Date(new Date().getFullYear(), 0, 1), 'yyyy-MM-dd'))
     }
   }, [open, ob])
@@ -88,7 +92,8 @@ function OpeningBalanceDialog({
         <DialogHeader>
           <DialogTitle>Số dư ban đầu</DialogTitle>
           <DialogDescription>
-            Nhập số tiền bạn đã có trước khi bắt đầu dùng app. Sẽ được ghi nhận là một khoản Thu nhập.
+            Nhập số tiền bạn đã có trước khi bắt đầu dùng app. Sẽ được ghi nhận là một khoản Thu
+            nhập.
           </DialogDescription>
         </DialogHeader>
 
@@ -98,7 +103,7 @@ function OpeningBalanceDialog({
             <Input
               autoFocus
               placeholder="0"
-              className="h-12 text-2xl font-bold text-right"
+              className="h-12 text-right text-2xl font-bold"
               inputMode="numeric"
               value={amount}
               onChange={(e) => setAmount(formatAmountDisplay(e.target.value))}
@@ -112,13 +117,24 @@ function OpeningBalanceDialog({
         </div>
 
         <DialogFooter className="gap-2">
-          <Button variant="outline" onClick={() => onOpenChange(false)} disabled={mutation.isPending}>
+          <Button
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+            disabled={mutation.isPending}
+          >
             Hủy
           </Button>
           <Button onClick={handleSubmit} disabled={mutation.isPending || !amount}>
             {mutation.isPending ? (
-              <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Đang lưu...</>
-            ) : ob?.transaction ? 'Cập nhật' : 'Lưu'}
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Đang lưu...
+              </>
+            ) : ob?.transaction ? (
+              'Cập nhật'
+            ) : (
+              'Lưu'
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -148,7 +164,7 @@ function PortfolioSummary({
   if (isLoading) {
     return (
       <Card>
-        <CardContent className="pt-5 space-y-3">
+        <CardContent className="space-y-3 pt-5">
           <Skeleton className="h-4 w-32" />
           <Skeleton className="h-10 w-48" />
           <div className="grid grid-cols-2 gap-3">
@@ -167,44 +183,38 @@ function PortfolioSummary({
   return (
     <Card>
       <CardContent className="pt-5">
-        <p className="text-sm text-muted-foreground mb-1">Tổng giá trị danh mục</p>
-        <p className="text-3xl font-bold mb-4">{formatVND(totalValue)}</p>
+        <p className="text-muted-foreground mb-1 text-sm">Tổng giá trị danh mục</p>
+        <p className="mb-4 text-3xl font-bold">{formatVND(totalValue)}</p>
 
-        <div className="grid grid-cols-2 gap-3 mb-3">
+        <div className="mb-3 grid grid-cols-2 gap-3">
           {/* Total Cost */}
           <div className="bg-muted/50 rounded-lg p-3">
-            <p className="text-xs text-muted-foreground mb-1">Vốn đầu tư</p>
-            <p className="font-semibold text-sm">{formatVND(totalCost)}</p>
+            <p className="text-muted-foreground mb-1 text-xs">Vốn đầu tư</p>
+            <p className="text-sm font-semibold">{formatVND(totalCost)}</p>
           </div>
 
           {/* P&L */}
           <div
             className={`rounded-lg p-3 ${
-              isProfit
-                ? 'bg-green-50 dark:bg-green-950/30'
-                : 'bg-red-50 dark:bg-red-950/30'
+              isProfit ? 'bg-green-50 dark:bg-green-950/30' : 'bg-red-50 dark:bg-red-950/30'
             }`}
           >
             <div
-              className={`flex items-center gap-1 text-xs mb-1 ${
-                isProfit
-                  ? 'text-green-600 dark:text-green-400'
-                  : 'text-red-600 dark:text-red-400'
+              className={`mb-1 flex items-center gap-1 text-xs ${
+                isProfit ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
               }`}
             >
               {isProfit ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
               Lãi / Lỗ
             </div>
             <p
-              className={`font-semibold text-sm ${
-                isProfit
-                  ? 'text-green-700 dark:text-green-300'
-                  : 'text-red-700 dark:text-red-300'
+              className={`text-sm font-semibold ${
+                isProfit ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'
               }`}
             >
               {isProfit ? '+' : ''}
               {formatVND(totalPnL)}
-              <span className="text-xs ml-1">
+              <span className="ml-1 text-xs">
                 ({isProfit ? '+' : ''}
                 {totalPnLPct.toFixed(1)}%)
               </span>
@@ -215,13 +225,11 @@ function PortfolioSummary({
         {/* Cash Balance */}
         <div
           className={`rounded-lg p-3 ${
-            cashIsNegative
-              ? 'bg-orange-50 dark:bg-orange-950/30'
-              : 'bg-blue-50 dark:bg-blue-950/30'
+            cashIsNegative ? 'bg-orange-50 dark:bg-orange-950/30' : 'bg-blue-50 dark:bg-blue-950/30'
           }`}
         >
           <div
-            className={`flex items-center justify-between mb-1 ${
+            className={`mb-1 flex items-center justify-between ${
               cashIsNegative
                 ? 'text-orange-600 dark:text-orange-400'
                 : 'text-blue-600 dark:text-blue-400'
@@ -234,7 +242,7 @@ function PortfolioSummary({
             <Button
               variant="ghost"
               size="icon"
-              className="h-6 w-6 -mr-1"
+              className="-mr-1 h-6 w-6"
               onClick={onEditOpeningBalance}
               title="Thiết lập số dư ban đầu"
             >
@@ -242,7 +250,7 @@ function PortfolioSummary({
             </Button>
           </div>
           <p
-            className={`font-semibold text-sm ${
+            className={`text-sm font-semibold ${
               cashIsNegative
                 ? 'text-orange-700 dark:text-orange-300'
                 : 'text-blue-700 dark:text-blue-300'
@@ -251,7 +259,7 @@ function PortfolioSummary({
             {formatVND(cashBalance)}
           </p>
           {cashIsNegative && (
-            <p className="text-xs text-orange-600 dark:text-orange-400 mt-1">
+            <p className="mt-1 text-xs text-orange-600 dark:text-orange-400">
               Thiếu số dư ban đầu — nhấn ✏️ để thiết lập
             </p>
           )}
@@ -303,8 +311,8 @@ export default function AssetsPage() {
       />
 
       {/* Holdings list */}
-      <div className="bg-card rounded-xl border border-border overflow-hidden">
-        <div className="p-4 border-b border-border">
+      <div className="bg-card border-border overflow-hidden rounded-xl border">
+        <div className="border-border border-b p-4">
           <h2 className="font-semibold">Danh mục đầu tư</h2>
         </div>
         <div className="p-4">

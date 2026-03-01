@@ -14,9 +14,7 @@ async function fetchAssetHoldings(): Promise<AssetHolding[]> {
   if (holdingsError) throw holdingsError
 
   // Fetch market prices
-  const { data: prices, error: pricesError } = await supabase
-    .from('market_prices')
-    .select('*')
+  const { data: prices, error: pricesError } = await supabase.from('market_prices').select('*')
 
   if (pricesError) throw pricesError
 
@@ -44,12 +42,11 @@ async function fetchAssetHoldings(): Promise<AssetHolding[]> {
 
     // Fallback to cost basis when no market price available
     const currentMarketPrice = marketPrice?.price_per_unit
-    const currentValue = currentMarketPrice != null
-      ? holding.total_quantity * currentMarketPrice
-      : holding.total_cost_basis
-    const unrealizedPnL = currentMarketPrice != null
-      ? currentValue - holding.total_cost_basis
-      : 0
+    const currentValue =
+      currentMarketPrice != null
+        ? holding.total_quantity * currentMarketPrice
+        : holding.total_cost_basis
+    const unrealizedPnL = currentMarketPrice != null ? currentValue - holding.total_cost_basis : 0
     const unrealizedPnLPct =
       holding.total_cost_basis > 0 ? (unrealizedPnL / holding.total_cost_basis) * 100 : 0
 

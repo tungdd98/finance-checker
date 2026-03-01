@@ -52,8 +52,8 @@ export function AddTransactionDialog({
               onSuccess={handleSuccess}
             />
           </div>
-          <div className="shrink-0 border-t bg-background px-4 pb-8 pt-3">
-            <Button type="submit" form="transaction-form" className="w-full h-12">
+          <div className="bg-background shrink-0 border-t px-4 pt-3 pb-8">
+            <Button type="submit" form="transaction-form" className="h-12 w-full">
               {submitLabel}
             </Button>
           </div>

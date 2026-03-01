@@ -149,21 +149,21 @@ finance-tracker-v2/
 
 ## Thư mục quan trọng (Critical Directories)
 
-| Thư mục | Vai trò |
-|---------|---------|
-| `src/app/` | Routing, layouts, pages |
-| `src/components/ui/` | shadcn/ui primitives — KHÔNG sửa trực tiếp |
-| `src/hooks/` | Toàn bộ data access logic |
-| `src/types/database.ts` | Source of truth cho TypeScript types |
-| `src/proxy.ts` | Auth gate — critical cho security |
-| `supabase/schema.sql` | Database schema |
-| `docs/` | Project documentation |
+| Thư mục                 | Vai trò                                    |
+| ----------------------- | ------------------------------------------ |
+| `src/app/`              | Routing, layouts, pages                    |
+| `src/components/ui/`    | shadcn/ui primitives — KHÔNG sửa trực tiếp |
+| `src/hooks/`            | Toàn bộ data access logic                  |
+| `src/types/database.ts` | Source of truth cho TypeScript types       |
+| `src/proxy.ts`          | Auth gate — critical cho security          |
+| `supabase/schema.sql`   | Database schema                            |
+| `docs/`                 | Project documentation                      |
 
 ## Entry Points
 
-| File | Mô tả |
-|------|-------|
-| `src/proxy.ts` | Middleware entry point |
-| `src/app/layout.tsx` | Root layout |
-| `src/app/(dashboard)/layout.tsx` | Dashboard shell |
-| `src/app/(dashboard)/page.tsx` | Dashboard home |
+| File                             | Mô tả                  |
+| -------------------------------- | ---------------------- |
+| `src/proxy.ts`                   | Middleware entry point |
+| `src/app/layout.tsx`             | Root layout            |
+| `src/app/(dashboard)/layout.tsx` | Dashboard shell        |
+| `src/app/(dashboard)/page.tsx`   | Dashboard home         |

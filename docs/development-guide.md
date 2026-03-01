@@ -6,17 +6,18 @@
 
 ## Prerequisites
 
-| Tool | Phiên bản | Mô tả |
-|------|-----------|-------|
-| Node.js | ≥ 20 | Runtime |
-| npm | ≥ 10 | Package manager |
-| Supabase account | — | Backend/DB |
+| Tool             | Phiên bản | Mô tả           |
+| ---------------- | --------- | --------------- |
+| Node.js          | ≥ 20      | Runtime         |
+| npm              | ≥ 10      | Package manager |
+| Supabase account | —         | Backend/DB      |
 
 ---
 
 ## Setup môi trường
 
 ### 1. Clone và cài dependencies
+
 ```bash
 git clone <repo-url>
 cd finance-tracker-v2
@@ -24,7 +25,9 @@ npm install
 ```
 
 ### 2. Cấu hình environment variables
+
 Tạo file `.env.local` ở root:
+
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
@@ -33,7 +36,9 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 > File `.env.local` đã có sẵn trong project. Xem Supabase dashboard → Settings → API.
 
 ### 3. Setup database
+
 Vào Supabase Dashboard → SQL Editor, chạy theo thứ tự:
+
 ```
 1. supabase/schema.sql                          # Schema + RLS + seed categories
 2. supabase/migration-category-redesign.sql     # Nếu cần
@@ -42,6 +47,7 @@ Vào Supabase Dashboard → SQL Editor, chạy theo thứ tự:
 ```
 
 ### 4. Tạo users
+
 Vào Supabase Dashboard → Authentication → Users → Add user
 (App là single-family, tạo thủ công 2 users: vợ/chồng)
 
@@ -73,11 +79,14 @@ File được tạo tại `src/components/ui/<component>.tsx`
 ## Conventions
 
 ### TypeScript Types
+
 - **Source of truth:** `src/types/database.ts`
 - Khi thêm field mới vào DB → cập nhật type ở đây trước
 
 ### TanStack Query Hooks
+
 Pattern cho mỗi entity mới:
+
 ```typescript
 // src/hooks/use-<entity>.ts
 
@@ -89,22 +98,25 @@ export function use<Entity>(filters?) {
       const { data, error } = await supabase.from('<table>').select('...')
       if (error) throw error
       return data ?? []
-    }
+    },
   })
 }
 
 export function useCreate<Entity>() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (data) => { /* supabase insert */ },
+    mutationFn: async (data) => {
+      /* supabase insert */
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['<entity>'] })
-    }
+    },
   })
 }
 ```
 
 ### Supabase Client
+
 ```typescript
 // Client components + hooks → LUÔN dùng browser client
 import { createClient } from '@/lib/supabase/client'
@@ -114,11 +126,13 @@ import { createClient } from '@/lib/supabase/server'
 ```
 
 ### Soft Delete
+
 - `transactions` và `assets` dùng soft delete
 - Query luôn có: `.is('deleted_at', null)`
 - Delete: `.update({ deleted_at: new Date().toISOString() })`
 
 ### Dialog vs Drawer
+
 ```typescript
 const isMobile = useIsMobile() // từ hook resize listener
 // Mobile → <Drawer> (vaul)
@@ -126,6 +140,7 @@ const isMobile = useIsMobile() // từ hook resize listener
 ```
 
 ### Theme (Anti-hydration-mismatch)
+
 ```typescript
 // LUÔN dùng pattern này khi render theme-dependent UI
 const [mounted, setMounted] = useState(false)
@@ -138,6 +153,7 @@ return resolvedTheme === 'dark' ? <SunIcon /> : <MoonIcon />
 ```
 
 ### Currency & Locale
+
 ```typescript
 // Format VND
 new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount)
@@ -212,20 +228,21 @@ git push origin main
 
 ## CI/CD
 
-| Workflow | Trigger | Mô tả |
-|----------|---------|-------|
-| `.github/workflows/claude-code-review.yml` | PR | Claude AI review code |
-| `.github/workflows/claude.yml` | PR | Claude PR assistant |
+| Workflow                                   | Trigger | Mô tả                 |
+| ------------------------------------------ | ------- | --------------------- |
+| `.github/workflows/claude-code-review.yml` | PR      | Claude AI review code |
+| `.github/workflows/claude.yml`             | PR      | Claude PR assistant   |
 
 ---
 
 ## Debugging
 
 **TanStack Query DevTools:** Thêm `ReactQueryDevtools` vào `query-provider.tsx` khi debug:
+
 ```tsx
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 // Trong QueryProvider:
-<ReactQueryDevtools initialIsOpen={false} />
+;<ReactQueryDevtools initialIsOpen={false} />
 ```
 
 **Supabase logs:** Dashboard → Logs → API logs để debug queries.

@@ -29,9 +29,7 @@ function formatAmountDisplay(value: string): string {
 
 const formSchema = z.object({
   name: z.string().min(1, 'Nhập tên mục tiêu'),
-  target_amount: z
-    .string()
-    .refine((v) => parseAmount(v) > 0, 'Nhập số tiền mục tiêu'),
+  target_amount: z.string().refine((v) => parseAmount(v) > 0, 'Nhập số tiền mục tiêu'),
   show_on_dashboard: z.boolean(),
 })
 
@@ -51,9 +49,7 @@ export function GoalForm({ goal, onSuccess }: GoalFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: goal?.name ?? '',
-      target_amount: goal
-        ? parseInt(String(goal.target_amount)).toLocaleString('vi-VN')
-        : '',
+      target_amount: goal ? parseInt(String(goal.target_amount)).toLocaleString('vi-VN') : '',
       show_on_dashboard: goal?.show_on_dashboard ?? true,
     },
   })
@@ -112,7 +108,7 @@ export function GoalForm({ goal, onSuccess }: GoalFormProps) {
                   {...field}
                   placeholder="0"
                   inputMode="numeric"
-                  className="h-14 text-2xl font-bold text-right"
+                  className="h-14 text-right text-2xl font-bold"
                   onChange={(e) => field.onChange(formatAmountDisplay(e.target.value))}
                 />
               </FormControl>
@@ -127,30 +123,31 @@ export function GoalForm({ goal, onSuccess }: GoalFormProps) {
           name="show_on_dashboard"
           render={({ field }) => (
             <FormItem>
-              <div className="flex items-center gap-3 p-3 rounded-lg border border-border">
+              <div className="border-border flex items-center gap-3 rounded-lg border p-3">
                 <button
                   type="button"
                   onClick={() => field.onChange(!field.value)}
-                  className={`relative w-11 h-6 rounded-full transition-colors ${field.value ? 'bg-primary' : 'bg-muted'}`}
+                  className={`relative h-6 w-11 rounded-full transition-colors ${field.value ? 'bg-primary' : 'bg-muted'}`}
                 >
                   <span
                     className={`absolute top-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${field.value ? 'translate-x-6' : 'translate-x-1'}`}
                   />
                 </button>
                 <div>
-                  <FormLabel className="cursor-pointer" onClick={() => field.onChange(!field.value)}>
+                  <FormLabel
+                    className="cursor-pointer"
+                    onClick={() => field.onChange(!field.value)}
+                  >
                     Hiển thị trên Dashboard
                   </FormLabel>
-                  <p className="text-xs text-muted-foreground">
-                    Ghim mục tiêu này lên trang chủ
-                  </p>
+                  <p className="text-muted-foreground text-xs">Ghim mục tiêu này lên trang chủ</p>
                 </div>
               </div>
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full h-12" disabled={isPending}>
+        <Button type="submit" className="h-12 w-full" disabled={isPending}>
           {isPending ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

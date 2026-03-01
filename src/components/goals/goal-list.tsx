@@ -48,36 +48,39 @@ interface GoalCardProps {
   onMarkAchieved: (g: Goal) => void
 }
 
-function GoalCard({ goal, totalAssets, onEdit, onDelete, onTogglePin, onMarkAchieved }: GoalCardProps) {
+function GoalCard({
+  goal,
+  totalAssets,
+  onEdit,
+  onDelete,
+  onTogglePin,
+  onMarkAchieved,
+}: GoalCardProps) {
   const progress = Math.min((totalAssets / goal.target_amount) * 100, 100)
   const isAchieved = !!goal.achieved_at
   const remaining = Math.max(goal.target_amount - totalAssets, 0)
 
   return (
-    <div className="p-4 rounded-lg hover:bg-muted/30 transition-colors group">
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-center gap-2 min-w-0">
-          {isAchieved && <Trophy className="h-4 w-4 text-yellow-500 shrink-0" />}
+    <div className="hover:bg-muted/30 group rounded-lg p-4 transition-colors">
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-2">
+          {isAchieved && <Trophy className="h-4 w-4 shrink-0 text-yellow-500" />}
           <div className="min-w-0">
-            <h3 className="font-semibold truncate">{goal.name}</h3>
-            <p className="text-xs text-muted-foreground mt-0.5">
+            <h3 className="truncate font-semibold">{goal.name}</h3>
+            <p className="text-muted-foreground mt-0.5 text-xs">
               Mục tiêu: {formatVND(goal.target_amount)}
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1 shrink-0">
-          {goal.show_on_dashboard && (
-            <Pin className="h-3.5 w-3.5 text-primary" />
-          )}
-          {isAchieved && (
-            <Badge className="text-xs bg-yellow-500 hover:bg-yellow-500">Đạt!</Badge>
-          )}
+        <div className="flex shrink-0 items-center gap-1">
+          {goal.show_on_dashboard && <Pin className="text-primary h-3.5 w-3.5" />}
+          {isAchieved && <Badge className="bg-yellow-500 text-xs hover:bg-yellow-500">Đạt!</Badge>}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 opacity-0 group-hover:opacity-100 md:opacity-100 transition-opacity"
+                className="h-7 w-7 opacity-0 transition-opacity group-hover:opacity-100 md:opacity-100"
               >
                 <MoreVertical className="h-3.5 w-3.5" />
               </Button>
@@ -120,15 +123,14 @@ function GoalCard({ goal, totalAssets, onEdit, onDelete, onTogglePin, onMarkAchi
       </div>
 
       {/* Progress */}
-      <Progress value={progress} className={`h-2.5 mb-2 ${isAchieved ? '[&>div]:bg-yellow-500' : ''}`} />
+      <Progress
+        value={progress}
+        className={`mb-2 h-2.5 ${isAchieved ? '[&>div]:bg-yellow-500' : ''}`}
+      />
 
-      <div className="flex items-center justify-between text-xs text-muted-foreground">
-        <span>
-          {isAchieved
-            ? '🎉 Đã hoàn thành!'
-            : `Còn thiếu ${formatVND(remaining)}`}
-        </span>
-        <span className="font-bold text-foreground">{progress.toFixed(1)}%</span>
+      <div className="text-muted-foreground flex items-center justify-between text-xs">
+        <span>{isAchieved ? '🎉 Đã hoàn thành!' : `Còn thiếu ${formatVND(remaining)}`}</span>
+        <span className="text-foreground font-bold">{progress.toFixed(1)}%</span>
       </div>
     </div>
   )
@@ -188,17 +190,17 @@ export function GoalList({ goals, totalAssets, isLoading }: GoalListProps) {
 
   if (goals.length === 0) {
     return (
-      <div className="text-center py-16 text-muted-foreground">
-        <div className="text-5xl mb-3">🎯</div>
+      <div className="text-muted-foreground py-16 text-center">
+        <div className="mb-3 text-5xl">🎯</div>
         <p className="text-sm font-medium">Chưa có mục tiêu nào</p>
-        <p className="text-xs mt-1">Thêm mục tiêu tài chính để theo dõi tiến độ</p>
+        <p className="mt-1 text-xs">Thêm mục tiêu tài chính để theo dõi tiến độ</p>
       </div>
     )
   }
 
   return (
     <>
-      <div className="divide-y divide-border">
+      <div className="divide-border divide-y">
         {goals.map((g) => (
           <GoalCard
             key={g.id}
@@ -225,7 +227,9 @@ export function GoalList({ goals, totalAssets, isLoading }: GoalListProps) {
             <DialogDescription>Mục tiêu sẽ bị xoá vĩnh viễn.</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDeletingId(null)}>Huỷ</Button>
+            <Button variant="outline" onClick={() => setDeletingId(null)}>
+              Huỷ
+            </Button>
             <Button
               variant="destructive"
               onClick={handleDelete}

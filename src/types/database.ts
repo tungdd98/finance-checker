@@ -18,7 +18,7 @@ export interface Transaction {
   category_id: string
   category?: Category
   notes?: string
-  transaction_date: string   // YYYY-MM-DD
+  transaction_date: string // YYYY-MM-DD
 
   // Investment-specific fields (nullable)
   transaction_direction?: TransactionDirection | null
@@ -48,7 +48,7 @@ export interface MarketPrice {
   id: string
   asset_type: 'gold' | 'stock' | 'etf' | 'savings'
   ticker_symbol?: string | null
-  price_per_unit?: number | null   // nullable; not used for savings presets
+  price_per_unit?: number | null // nullable; not used for savings presets
   updated_at: string
   created_at: string
   // Savings-specific fields

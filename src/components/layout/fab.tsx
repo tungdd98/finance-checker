@@ -12,7 +12,7 @@ export function Fab({ onClick }: FabProps) {
     <Button
       onClick={onClick}
       size="icon"
-      className="md:hidden fixed bottom-20 right-4 z-50 h-14 w-14 rounded-full shadow-lg shadow-primary/25"
+      className="shadow-primary/25 fixed right-4 bottom-20 z-50 h-14 w-14 rounded-full shadow-lg md:hidden"
     >
       <Plus className="h-6 w-6" />
     </Button>

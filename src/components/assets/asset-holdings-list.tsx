@@ -33,17 +33,17 @@ export function AssetHoldingsList({ holdings, isLoading }: AssetHoldingsListProp
         {[1, 2, 3].map((i) => (
           <Card key={i}>
             <CardContent className="p-4">
-              <div className="flex justify-between items-start">
-                <div className="space-y-2 flex-1">
+              <div className="flex items-start justify-between">
+                <div className="flex-1 space-y-2">
                   <Skeleton className="h-5 w-32" />
                   <Skeleton className="h-4 w-24" />
                 </div>
                 <div className="space-y-2 text-right">
-                  <Skeleton className="h-6 w-24 ml-auto" />
-                  <Skeleton className="h-4 w-20 ml-auto" />
+                  <Skeleton className="ml-auto h-6 w-24" />
+                  <Skeleton className="ml-auto h-4 w-20" />
                 </div>
               </div>
-              <Skeleton className="h-4 w-full mt-3" />
+              <Skeleton className="mt-3 h-4 w-full" />
             </CardContent>
           </Card>
         ))}
@@ -53,9 +53,9 @@ export function AssetHoldingsList({ holdings, isLoading }: AssetHoldingsListProp
 
   if (holdings.length === 0) {
     return (
-      <div className="text-center py-12 text-muted-foreground">
+      <div className="text-muted-foreground py-12 text-center">
         <p className="text-sm">Chưa có tài sản đầu tư nào</p>
-        <p className="text-xs mt-1">Thêm giao dịch đầu tư để bắt đầu theo dõi danh mục</p>
+        <p className="mt-1 text-xs">Thêm giao dịch đầu tư để bắt đầu theo dõi danh mục</p>
       </div>
     )
   }
@@ -71,26 +71,22 @@ export function AssetHoldingsList({ holdings, isLoading }: AssetHoldingsListProp
         return (
           <Card key={holdingKey}>
             <CardContent className="p-4">
-              <div className="flex justify-between items-start gap-4">
+              <div className="flex items-start justify-between gap-4">
                 {/* Left: Category + Details */}
-                <div className="flex-1 min-w-0">
+                <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     {holding.category_icon && (
                       <span className="text-base">{holding.category_icon}</span>
                     )}
-                    <h3 className="font-semibold text-base truncate">
-                      {holding.category_name}
-                    </h3>
+                    <h3 className="truncate text-base font-semibold">{holding.category_name}</h3>
                   </div>
 
                   {/* Ticker or Bank */}
                   {holding.ticker_symbol && (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {holding.ticker_symbol}
-                    </p>
+                    <p className="text-muted-foreground mt-1 text-sm">{holding.ticker_symbol}</p>
                   )}
                   {holding.bank_name && (
-                    <p className="text-sm text-muted-foreground mt-1">
+                    <p className="text-muted-foreground mt-1 text-sm">
                       {holding.bank_name}
                       {holding.interest_rate && ` • ${holding.interest_rate}%/năm`}
                       {holding.term_months && ` • ${holding.term_months} tháng`}
@@ -100,13 +96,11 @@ export function AssetHoldingsList({ holdings, isLoading }: AssetHoldingsListProp
 
                 {/* Right: Current Value + P&L */}
                 <div className="text-right">
-                  <p className="text-lg font-bold">
-                    {formatVND(holding.current_value || 0)}
-                  </p>
+                  <p className="text-lg font-bold">{formatVND(holding.current_value || 0)}</p>
                   {holding.unrealized_pnl !== undefined && (
                     <div
                       className={cn(
-                        'flex items-center gap-1 justify-end text-sm mt-1',
+                        'mt-1 flex items-center justify-end gap-1 text-sm',
                         isProfit
                           ? 'text-green-600 dark:text-green-400'
                           : 'text-red-600 dark:text-red-400'
@@ -131,10 +125,10 @@ export function AssetHoldingsList({ holdings, isLoading }: AssetHoldingsListProp
               </div>
 
               {/* Bottom: Quantity, Avg Cost, Current Price */}
-              <div className="mt-3 pt-3 border-t border-border text-xs text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
+              <div className="border-border text-muted-foreground mt-3 flex flex-wrap gap-x-3 gap-y-1 border-t pt-3 text-xs">
                 <span>
                   Số lượng:{' '}
-                  <span className="font-medium text-foreground">
+                  <span className="text-foreground font-medium">
                     {holding.total_quantity.toLocaleString('vi-VN', {
                       maximumFractionDigits: 6,
                     })}
@@ -143,22 +137,21 @@ export function AssetHoldingsList({ holdings, isLoading }: AssetHoldingsListProp
                 <span>•</span>
                 <span>
                   Giá TB:{' '}
-                  <span className="font-medium text-foreground">
+                  <span className="text-foreground font-medium">
                     {formatVND(holding.avg_cost_basis)}
                   </span>
                 </span>
-                {holding.current_market_price !== undefined &&
-                  holding.current_market_price > 0 && (
-                    <>
-                      <span>•</span>
-                      <span>
-                        Giá HT:{' '}
-                        <span className="font-medium text-foreground">
-                          {formatVND(holding.current_market_price)}
-                        </span>
+                {holding.current_market_price !== undefined && holding.current_market_price > 0 && (
+                  <>
+                    <span>•</span>
+                    <span>
+                      Giá HT:{' '}
+                      <span className="text-foreground font-medium">
+                        {formatVND(holding.current_market_price)}
                       </span>
-                    </>
-                  )}
+                    </span>
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>

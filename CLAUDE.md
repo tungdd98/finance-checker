@@ -11,6 +11,7 @@ npm run lint     # ESLint check
 ```
 
 To add shadcn/ui components:
+
 ```bash
 npx shadcn@latest add <component>
 ```
@@ -30,6 +31,7 @@ npx shadcn@latest add <component>
 All data fetching goes through TanStack Query hooks in `src/hooks/`. Each hook file exports `use<Entity>` (read) and `useCreate/Update/Delete<Entity>` (mutations). Mutations always invalidate relevant query keys on success.
 
 **Query key conventions:**
+
 - `['transactions', filters]`
 - `['assets']`
 - `['goals']`
@@ -56,6 +58,7 @@ Dates: `date-fns` with `vi` locale
 ### Type System
 
 All TypeScript types are centralized in `src/types/database.ts`. Key enums:
+
 - `TransactionType`: `'income' | 'expense' | 'investment' | 'transfer'`
 - `AssetType`: `'savings' | 'gold' | 'stock' | 'etf' | 'real_estate' | 'cash' | 'other'`
 
@@ -90,13 +93,13 @@ New request received
 
 ### When to Use Each Workflow
 
-| Scenario | Workflow | Agent |
-|---|---|---|
-| Quick one-off task, small addition, brownfield tweak | `/bmad-bmm-quick-spec` → `/bmad-bmm-quick-dev` | 🚀 Barry (Quick Flow Solo Dev) |
-| Feature tracked in sprint plan | `/bmad-bmm-create-story` → `/bmad-bmm-dev-story` | 🏃 Bob → 💻 Amelia |
-| Post-implementation quality check | `/bmad-bmm-code-review` | 💻 Amelia |
-| Sprint overview or next story guidance | `/bmad-bmm-sprint-status` | 🏃 Bob |
-| Significant pivot or scope change | `/bmad-bmm-correct-course` | 🏃 Bob |
+| Scenario                                             | Workflow                                         | Agent                          |
+| ---------------------------------------------------- | ------------------------------------------------ | ------------------------------ |
+| Quick one-off task, small addition, brownfield tweak | `/bmad-bmm-quick-spec` → `/bmad-bmm-quick-dev`   | 🚀 Barry (Quick Flow Solo Dev) |
+| Feature tracked in sprint plan                       | `/bmad-bmm-create-story` → `/bmad-bmm-dev-story` | 🏃 Bob → 💻 Amelia             |
+| Post-implementation quality check                    | `/bmad-bmm-code-review`                          | 💻 Amelia                      |
+| Sprint overview or next story guidance               | `/bmad-bmm-sprint-status`                        | 🏃 Bob                         |
+| Significant pivot or scope change                    | `/bmad-bmm-correct-course`                       | 🏃 Bob                         |
 
 ### Rules
 

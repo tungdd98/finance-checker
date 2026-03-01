@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -134,10 +134,10 @@
     @apply bg-background text-foreground;
   }
   button:not(:disabled),
-  [role="button"]:not([aria-disabled="true"]),
-  [role="option"],
-  [role="menuitem"],
-  [role="tab"],
+  [role='button']:not([aria-disabled='true']),
+  [role='option'],
+  [role='menuitem'],
+  [role='tab'],
   select,
   label {
     cursor: pointer;

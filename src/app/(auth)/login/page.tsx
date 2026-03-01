@@ -39,13 +39,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="bg-background flex min-h-screen items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="mb-8 flex flex-col items-center">
+          <div className="mb-2 flex items-center gap-2">
             <div className="bg-primary rounded-xl p-2">
-              <TrendingUp className="h-6 w-6 text-primary-foreground" />
+              <TrendingUp className="text-primary-foreground h-6 w-6" />
             </div>
             <span className="text-2xl font-bold">Finance CC</span>
           </div>
@@ -54,7 +54,7 @@ export default function LoginPage() {
 
         <Card>
           <CardHeader>
-            <h1 className="text-xl font-semibold text-center">Đăng nhập</h1>
+            <h1 className="text-center text-xl font-semibold">Đăng nhập</h1>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -86,16 +86,12 @@ export default function LoginPage() {
               </div>
 
               {error && (
-                <div className="bg-destructive/10 text-destructive text-sm rounded-md p-3">
+                <div className="bg-destructive/10 text-destructive rounded-md p-3 text-sm">
                   {error}
                 </div>
               )}
 
-              <Button
-                type="submit"
-                className="w-full h-12"
-                disabled={loading}
-              >
+              <Button type="submit" className="h-12 w-full" disabled={loading}>
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
